@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class FirstViewController: UIViewController {
 
@@ -14,11 +16,11 @@ class FirstViewController: UIViewController {
     //new shapelayer
     let shapeLayer = CAShapeLayer()
     
+    var ref = Database.database().reference()
+    
     @IBOutlet weak var Lvl: UILabel!
     
     @IBOutlet weak var XpRemaning: UILabel!
-    
-    
     
     @IBOutlet weak var XpInput: UITextField!
     
@@ -26,7 +28,8 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        getXp()
+        print("total xp is \(lvlSystem.xp)")
         Lvl.text = "\(lvlSystem.getLvl())"
         XpRemaning.text = "\(lvlSystem.xpRemaningToNextLvl()) xp remaning for next lvl"
         
@@ -38,7 +41,7 @@ class FirstViewController: UIViewController {
         
         if let newxp = Double(XpInput.text!){
             lvlSystem.addXp(newXp: newxp)
-            
+            saveXp()
             animateCircle()
             
             viewDidLoad()
@@ -96,7 +99,29 @@ class FirstViewController: UIViewController {
             
             shapeLayer.add(basicAnimation, forKey: "urSoBasic")
         }
-
+    
+    func saveXp(){
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        ref.child("users").child(uid).child("xp").setValue(lvlSystem.xp)
+    }
+    
+    func getXp(){
+        let uid = Auth.auth().currentUser?.uid
+        ref.child("users").child(uid!).child("xp").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            var value = snapshot.value as? Double
+            
+            //if the value does not excist in database create it and set to 0.0
+            if value == nil {
+                self.ref.child("users").child(uid!).child("xp").setValue(self.lvlSystem.xp)
+                value = 0.0
+            }
+            self.lvlSystem.xp = value!
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
     
 
 }
