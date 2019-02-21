@@ -33,6 +33,17 @@ class CreateUserViewController: UIViewController {
             }else{
                 //user registered successfully
                 print(result)
+                
+                Auth.auth().signIn(withEmail: (self.txtEmail.text ?? ""), password: (self.txtPass.text ?? "")) { (result, error) in
+                    if let _eror = error{
+                        print(_eror.localizedDescription)
+                    }else{
+                        if let _res = result{
+                            print(_res)
+                        }
+                    }
+                }
+                self.performSegue(withIdentifier: "GoHome", sender: self)
             }
         }
  
