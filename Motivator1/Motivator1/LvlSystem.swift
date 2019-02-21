@@ -11,7 +11,7 @@ import UIKit
 
 class LvlSystem{
     
-    var xp = 100.0
+    var xp = 0.0
     
     // xp=250+lvl^2*100
     // lvl=sqrt((xp-250)/100)

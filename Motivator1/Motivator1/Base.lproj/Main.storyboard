@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OFv-iq-tmg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IpJ-iF-AG8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -148,6 +148,10 @@
                         <constraints>
                             <constraint firstItem="q5K-G9-yM2" firstAttribute="centerY" secondItem="IW7-T8-ZPG" secondAttribute="centerY" id="PJr-xg-mcH"/>
                             <constraint firstItem="q5K-G9-yM2" firstAttribute="centerX" secondItem="IW7-T8-ZPG" secondAttribute="centerX" id="S82-XA-eTe"/>
+                            <constraint firstItem="doc-Bv-p0N" firstAttribute="bottom" secondItem="q5K-G9-yM2" secondAttribute="bottom" constant="252.5" id="WzU-aE-ct7"/>
+                            <constraint firstItem="q5K-G9-yM2" firstAttribute="top" secondItem="doc-Bv-p0N" secondAttribute="top" constant="232.5" id="YOf-LQ-3t2"/>
+                            <constraint firstItem="doc-Bv-p0N" firstAttribute="trailing" secondItem="q5K-G9-yM2" secondAttribute="trailing" constant="120.5" id="fYx-tX-E7l"/>
+                            <constraint firstItem="q5K-G9-yM2" firstAttribute="leading" secondItem="doc-Bv-p0N" secondAttribute="leading" constant="120.5" id="lj3-4D-yKG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="doc-Bv-p0N"/>
                     </view>
@@ -159,7 +163,55 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8MN-du-Vab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-855" y="-452"/>
+            <point key="canvasLocation" x="-842" y="251"/>
+        </scene>
+        <!--Start Page View Controller-->
+        <scene sceneID="9W5-CE-5uv">
+            <objects>
+                <viewController id="IpJ-iF-AG8" customClass="StartPageViewController" customModule="Motivator1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8KW-q2-wRO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="n3O-po-xlW">
+                                <rect key="frame" x="161.5" y="293" width="52" height="81"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNn-Le-haD">
+                                        <rect key="frame" x="0.0" y="0.0" width="52" height="30"/>
+                                        <state key="normal" title="Login"/>
+                                        <connections>
+                                            <action selector="Login:" destination="IpJ-iF-AG8" eventType="touchUpInside" id="8Cc-Ig-e9f"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bea-d1-VAZ">
+                                        <rect key="frame" x="0.0" y="51" width="52" height="30"/>
+                                        <state key="normal" title="Sign up"/>
+                                        <connections>
+                                            <action selector="SignUp:" destination="IpJ-iF-AG8" eventType="touchUpInside" id="GiR-tR-ghA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HBp-S6-o2f" firstAttribute="trailing" secondItem="n3O-po-xlW" secondAttribute="trailing" constant="161.5" id="4Vp-Cd-0sh"/>
+                            <constraint firstItem="n3O-po-xlW" firstAttribute="leading" secondItem="HBp-S6-o2f" secondAttribute="leading" constant="161.5" id="9xI-D5-wVu"/>
+                            <constraint firstItem="HBp-S6-o2f" firstAttribute="bottom" secondItem="n3O-po-xlW" secondAttribute="bottom" constant="293" id="DZ0-2X-xdO"/>
+                            <constraint firstItem="n3O-po-xlW" firstAttribute="centerY" secondItem="8KW-q2-wRO" secondAttribute="centerY" id="W2J-iY-41k"/>
+                            <constraint firstItem="n3O-po-xlW" firstAttribute="centerX" secondItem="8KW-q2-wRO" secondAttribute="centerX" id="Zoj-6Q-bbn"/>
+                            <constraint firstItem="n3O-po-xlW" firstAttribute="top" secondItem="HBp-S6-o2f" secondAttribute="top" constant="273" id="sjI-c7-aHT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HBp-S6-o2f"/>
+                    </view>
+                    <connections>
+                        <segue destination="brV-gr-Fm0" kind="show" identifier="SignUp" id="ocj-uj-yJA"/>
+                        <segue destination="OFv-iq-tmg" kind="show" identifier="Login" id="JZm-ja-RNL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ffo-eh-Bed" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1591" y="-28"/>
         </scene>
         <!--Login Email View Controller-->
         <scene sceneID="px0-P3-Hfa">
@@ -197,7 +249,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7W6-lV-emH" firstAttribute="centerX" secondItem="SeI-dd-dzv" secondAttribute="centerX" id="4g7-f1-dKs"/>
+                            <constraint firstItem="rc2-p9-1K1" firstAttribute="bottom" secondItem="7W6-lV-emH" secondAttribute="bottom" constant="249.5" id="QFS-Cf-R4s"/>
+                            <constraint firstItem="rc2-p9-1K1" firstAttribute="trailing" secondItem="7W6-lV-emH" secondAttribute="trailing" constant="120.5" id="TGn-fT-aeM"/>
                             <constraint firstItem="7W6-lV-emH" firstAttribute="centerY" secondItem="SeI-dd-dzv" secondAttribute="centerY" id="Uo1-9a-CVN"/>
+                            <constraint firstItem="7W6-lV-emH" firstAttribute="top" secondItem="rc2-p9-1K1" secondAttribute="top" constant="229.5" id="kgR-8y-QI1"/>
+                            <constraint firstItem="7W6-lV-emH" firstAttribute="leading" secondItem="rc2-p9-1K1" secondAttribute="leading" constant="120.5" id="svu-cm-SQG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rc2-p9-1K1"/>
                     </view>
@@ -209,7 +265,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEG-pe-faF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-855" y="245"/>
+            <point key="canvasLocation" x="-842" y="-475"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -235,6 +291,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pZ1-Jq-RuJ"/>
+        <segue reference="2kZ-7X-s7c"/>
     </inferredMetricsTieBreakers>
 </document>
