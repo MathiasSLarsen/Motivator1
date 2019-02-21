@@ -141,6 +141,8 @@
                         <viewLayoutGuide key="safeArea" id="doc-Bv-p0N"/>
                     </view>
                     <connections>
+                        <outlet property="txtEmail" destination="1Yb-rB-czh" id="bnt-vu-4O9"/>
+                        <outlet property="txtPass" destination="HNB-cp-jcg" id="Nmc-vI-Zpt"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="GoHome" id="2kZ-7X-s7c"/>
                     </connections>
                 </viewController>

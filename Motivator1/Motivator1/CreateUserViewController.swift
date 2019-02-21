@@ -12,6 +12,11 @@ import Firebase
 
 class CreateUserViewController: UIViewController {
 
+    @IBOutlet weak var txtEmail: UITextField!
+    
+    @IBOutlet weak var txtPass: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,16 +24,16 @@ class CreateUserViewController: UIViewController {
     }
     
     @IBAction func CreateUser(_ sender: Any) {
-        let email = "test@test.com"
-        let passwd = "1234"
-        
-        Auth.auth().createUser(withEmail: email, password: passwd) {authResult, error in
-            if error == nil && authResult != nil{
-                print("Created User")
+       
+        Auth.auth().createUser(withEmail: (txtEmail.text ?? ""), password: (txtPass.text ?? "")) { (result, error) in
+            if let _eror = error {
+                //something bad happning
+                print(_eror.localizedDescription )
+                print("der er sket en fejl")
             }else{
-                print("Error creating user")
+                //user registered successfully
+                print(result)
             }
- 
         }
  
     }
