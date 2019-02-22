@@ -37,6 +37,18 @@ class FirstViewController: UIViewController {
     }
     
     
+    @IBAction func LogoutButton(_ sender: Any) {
+        do{
+            try Auth.auth().signOut()
+        } catch let logoutError{
+            print(logoutError)
+        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let startPageVC = storyboard.instantiateViewController(withIdentifier: "StartPageViewController")
+        self.present(startPageVC, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func SubmitButton(_ sender: Any) {
         
         if let newxp = Double(XpInput.text!){
