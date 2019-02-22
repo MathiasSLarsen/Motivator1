@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class StartPageViewController: UIViewController {
 
@@ -14,6 +15,14 @@ class StartPageViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if Auth.auth().currentUser != nil {
+            self.performSegue(withIdentifier: "GoHome3", sender: nil)
+        }
     }
     
     @IBAction func Login(_ sender: Any) {

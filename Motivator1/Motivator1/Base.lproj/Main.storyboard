@@ -176,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8MN-du-Vab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-842" y="251"/>
+            <point key="canvasLocation" x="-842" y="359"/>
         </scene>
         <!--Start Page View Controller-->
         <scene sceneID="9W5-CE-5uv">
@@ -220,6 +220,7 @@
                     <connections>
                         <segue destination="brV-gr-Fm0" kind="show" identifier="SignUp" id="ocj-uj-yJA"/>
                         <segue destination="OFv-iq-tmg" kind="show" identifier="Login" id="JZm-ja-RNL"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="GoHome3" id="Vhf-Fr-rm5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ffo-eh-Bed" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -304,6 +305,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2kZ-7X-s7c"/>
+        <segue reference="Vhf-Fr-rm5"/>
     </inferredMetricsTieBreakers>
 </document>
