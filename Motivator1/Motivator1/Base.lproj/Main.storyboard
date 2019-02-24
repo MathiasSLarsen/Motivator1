@@ -186,34 +186,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="n3O-po-xlW">
-                                <rect key="frame" x="161.5" y="293" width="52" height="81"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="A9l-uQ-5D7">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lou-QW-7Rf">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNn-Le-haD">
-                                        <rect key="frame" x="0.0" y="0.0" width="52" height="30"/>
-                                        <state key="normal" title="Login"/>
-                                        <connections>
-                                            <action selector="Login:" destination="IpJ-iF-AG8" eventType="touchUpInside" id="8Cc-Ig-e9f"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bea-d1-VAZ">
-                                        <rect key="frame" x="0.0" y="51" width="52" height="30"/>
-                                        <state key="normal" title="Sign up"/>
-                                        <connections>
-                                            <action selector="SignUp:" destination="IpJ-iF-AG8" eventType="touchUpInside" id="GiR-tR-ghA"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="n3O-po-xlW">
+                                        <rect key="frame" x="89.5" y="271" width="196" height="105"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNn-Le-haD">
+                                                <rect key="frame" x="0.0" y="0.0" width="196" height="42"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="Login with email"/>
+                                                <connections>
+                                                    <action selector="Login:" destination="IpJ-iF-AG8" eventType="touchUpInside" id="8Cc-Ig-e9f"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bea-d1-VAZ">
+                                                <rect key="frame" x="0.0" y="63" width="196" height="42"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="Sign up with email"/>
+                                                <connections>
+                                                    <action selector="SignUp:" destination="IpJ-iF-AG8" eventType="touchUpInside" id="GiR-tR-ghA"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
-                            </stackView>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="n3O-po-xlW" firstAttribute="centerY" secondItem="lou-QW-7Rf" secondAttribute="centerY" id="Him-kH-xY3"/>
+                                    <constraint firstItem="n3O-po-xlW" firstAttribute="centerX" secondItem="lou-QW-7Rf" secondAttribute="centerX" id="KYw-2b-en0"/>
+                                    <constraint firstItem="n3O-po-xlW" firstAttribute="centerY" secondItem="lou-QW-7Rf" secondAttribute="centerY" id="ach-tn-mvq"/>
+                                    <constraint firstItem="n3O-po-xlW" firstAttribute="centerX" secondItem="lou-QW-7Rf" secondAttribute="centerX" id="x9A-bg-UFv"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="HBp-S6-o2f" firstAttribute="trailing" secondItem="n3O-po-xlW" secondAttribute="trailing" constant="161.5" id="4Vp-Cd-0sh"/>
-                            <constraint firstItem="n3O-po-xlW" firstAttribute="leading" secondItem="HBp-S6-o2f" secondAttribute="leading" constant="161.5" id="9xI-D5-wVu"/>
-                            <constraint firstItem="HBp-S6-o2f" firstAttribute="bottom" secondItem="n3O-po-xlW" secondAttribute="bottom" constant="293" id="DZ0-2X-xdO"/>
-                            <constraint firstItem="n3O-po-xlW" firstAttribute="centerY" secondItem="8KW-q2-wRO" secondAttribute="centerY" id="W2J-iY-41k"/>
-                            <constraint firstItem="n3O-po-xlW" firstAttribute="centerX" secondItem="8KW-q2-wRO" secondAttribute="centerX" id="Zoj-6Q-bbn"/>
-                            <constraint firstItem="n3O-po-xlW" firstAttribute="top" secondItem="HBp-S6-o2f" secondAttribute="top" constant="273" id="sjI-c7-aHT"/>
+                            <constraint firstItem="A9l-uQ-5D7" firstAttribute="leading" secondItem="8KW-q2-wRO" secondAttribute="leading" id="6nx-Xd-WT3"/>
+                            <constraint firstItem="lou-QW-7Rf" firstAttribute="trailing" secondItem="HBp-S6-o2f" secondAttribute="trailing" id="NuX-gW-PYz"/>
+                            <constraint firstItem="HBp-S6-o2f" firstAttribute="trailing" secondItem="lou-QW-7Rf" secondAttribute="trailing" id="Pzo-Rc-i8L"/>
+                            <constraint firstItem="A9l-uQ-5D7" firstAttribute="bottom" secondItem="8KW-q2-wRO" secondAttribute="bottom" id="Vse-Mz-ZkE"/>
+                            <constraint firstItem="lou-QW-7Rf" firstAttribute="bottom" secondItem="HBp-S6-o2f" secondAttribute="bottom" id="Zum-RW-uuZ"/>
+                            <constraint firstItem="A9l-uQ-5D7" firstAttribute="top" secondItem="8KW-q2-wRO" secondAttribute="top" id="g12-mG-cM1"/>
+                            <constraint firstItem="lou-QW-7Rf" firstAttribute="leading" secondItem="HBp-S6-o2f" secondAttribute="leading" id="kd5-tf-owM"/>
+                            <constraint firstItem="lou-QW-7Rf" firstAttribute="top" secondItem="HBp-S6-o2f" secondAttribute="top" id="trF-BB-Xea"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HBp-S6-o2f"/>
                     </view>
@@ -301,10 +320,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Background" width="1920" height="1080"/>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vhf-Fr-rm5"/>
+        <segue reference="pZ1-Jq-RuJ"/>
     </inferredMetricsTieBreakers>
 </document>
