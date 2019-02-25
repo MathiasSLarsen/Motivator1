@@ -43,6 +43,13 @@ class LvlSystem{
         }
     }
     
+    func progress()->Double{
+        let progress = xp - xpForThisLvl(lvl: getLvl())
+        let total = xpForNextLvl(lvl: getLvl()) - xpForThisLvl(lvl: getLvl())
+        
+        return progress / total
+    }
+    
     //calculates how many xp you need to get to the next lvl
     func xpRemaningToNextLvl()->Double{
         return xpForNextLvl(lvl: getLvl()) - xp
