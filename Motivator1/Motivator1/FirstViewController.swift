@@ -34,8 +34,8 @@ class FirstViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getXp()
-        print("getXp shuld have run \(lvlSystem.xp)")
-        setFields()
+        //print("getXp shuld have run \(lvlSystem.xp)")
+        //setFields()
         
     }
     
@@ -137,6 +137,10 @@ class FirstViewController: UIViewController {
                 value = 0.0
             }
             self.lvlSystem.xp = value!
+            
+            OperationQueue.main.addOperation {
+                self.setFields()
+            }
             // ...
         }) { (error) in
             print(error.localizedDescription)

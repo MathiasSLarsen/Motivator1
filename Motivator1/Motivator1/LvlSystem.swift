@@ -12,6 +12,8 @@ import UIKit
 class LvlSystem{
     
     var xp = 0.0
+    var dalyXp = 0.0
+    
     
     // xp=250+lvl^2*100
     // lvl=sqrt((xp-250)/100)
@@ -48,6 +50,10 @@ class LvlSystem{
     
     func addXp(newXp: Double){
         xp = xp + newXp
+    }
+    
+    func addDalyXp(newXp: Double){
+        dalyXp = dalyXp + newXp
     }
     
 }
