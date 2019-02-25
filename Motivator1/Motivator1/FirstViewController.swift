@@ -28,15 +28,24 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         getXp()
+        print("getXp shuld have run \(lvlSystem.xp)")
+        setFields()
+        
+    }
+    
+    func setFields(){
         print("total xp is \(lvlSystem.xp)")
         Lvl.text = "\(lvlSystem.getLvl())"
         XpRemaning.text = "\(lvlSystem.xpRemaningToNextLvl()) xp remaning for next lvl"
         
         animateCircle()
     }
-    
-    
     @IBAction func LogoutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
@@ -54,9 +63,8 @@ class FirstViewController: UIViewController {
         if let newxp = Double(XpInput.text!){
             lvlSystem.addXp(newXp: newxp)
             saveXp()
-            animateCircle()
-            
-            viewDidLoad()
+            //animateCircle()
+            setFields()
         }
     }
 
