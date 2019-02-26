@@ -14,7 +14,9 @@ class FirstViewController: UIViewController {
 
     var lvlSystem = LvlSystem()
     //new shapelayer
-    let shapeLayer = CAShapeLayer()
+    //let shapeLayer = CAShapeLayer()
+    let formatter = DateFormatter()
+    
     
     var ref = Database.database().reference()
     
@@ -30,14 +32,14 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        formatter.dateFormat = "dd-MM-yyyy"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getXp()
         
-        ProgressBar.transform = ProgressBar.transform.scaledBy(x: 1, y: 5)
+        //ProgressBar.transform = ProgressBar.transform.scaledBy(x: 1, y: 5)
         //print("getXp shuld have run \(lvlSystem.xp)")
         //setFields()
         
@@ -51,6 +53,7 @@ class FirstViewController: UIViewController {
         print("progress is \(lvlSystem.progress())")
         //animateCircle()
     }
+    
     @IBAction func LogoutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
@@ -67,6 +70,12 @@ class FirstViewController: UIViewController {
         
         if let newxp = Double(XpInput.text!){
             lvlSystem.addXp(newXp: newxp)
+            if (formatter.string(from: Date()) == lvlSystem.date){
+                lvlSystem.addDalyXp(newXp: newxp)
+            }else{
+                lvlSystem.dalyXp = newxp
+                lvlSystem.date = formatter.string(from: Date())
+            }
             saveXp()
             //animateCircle()
             setFields()
@@ -138,18 +147,20 @@ class FirstViewController: UIViewController {
     
     func saveXp(){
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        ref.child("users").child(uid).child("xp").setValue(lvlSystem.xp)
+        ref.child("users").child(uid).child("xp").child("totalXp").setValue(lvlSystem.xp)
+        ref.child("users").child(uid).child("xp").child(formatter.string(from: Date())).setValue(lvlSystem.dalyXp)
     }
     
     func getXp(){
         let uid = Auth.auth().currentUser?.uid
-        ref.child("users").child(uid!).child("xp").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users").child(uid!).child("xp").child("totalXp").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             var value = snapshot.value as? Double
             
             //if the value does not excist in database create it and set to 0.0
             if value == nil {
-                self.ref.child("users").child(uid!).child("xp").setValue(self.lvlSystem.xp)
+                self.saveXp()
+                //self.ref.child("users").child(uid!).child("xp").setValue(self.lvlSystem.xp)
                 value = 0.0
             }
             self.lvlSystem.xp = value!

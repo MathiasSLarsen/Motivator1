@@ -13,7 +13,7 @@ class LvlSystem{
     
     var xp = 0.0
     var dalyXp = 0.0
-    
+    var date = "20-02-2019"
     
     // xp=250+lvl^2*100
     // lvl=sqrt((xp-250)/100)
