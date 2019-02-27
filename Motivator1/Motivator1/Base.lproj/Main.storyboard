@@ -133,6 +133,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="YAS-9x-fP8"/>
                     </view>
+                    <connections>
+                        <outlet property="BarChart" destination="VbE-ep-xFR" id="eki-RL-K2W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVo-7m-fqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

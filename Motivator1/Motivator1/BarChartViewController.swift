@@ -7,13 +7,28 @@
 //
 
 import UIKit
+import Charts
 
 class BarChartViewController: UIViewController {
 
+    @IBOutlet weak var BarChart: BarChartView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        updateChartData()
+    }
+    func updateChartData(){
+        let entry1 = BarChartDataEntry(x: 1, y: 6.6)
+        let entry2 = BarChartDataEntry(x: 2, y: 9.6)
+        let entry3 = BarChartDataEntry(x: 3, y: 3.6)
+        let dataset = BarChartDataSet(values: [entry1, entry2, entry3], label: "hej")
+        let data = BarChartData(dataSets: [dataset])
+        BarChart.data = data
+        BarChart.chartDescription?.text = "test"
+        
+        BarChart.notifyDataSetChanged()
+        
     }
     
 
