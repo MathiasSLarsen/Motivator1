@@ -14,6 +14,7 @@
 		27EAA691221DE27100B8887C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27EAA690221DE27100B8887C /* Assets.xcassets */; };
 		27EAA694221DE27100B8887C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27EAA692221DE27100B8887C /* LaunchScreen.storyboard */; };
 		27EAA69C221DE28500B8887C /* LvlSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EAA69B221DE28500B8887C /* LvlSystem.swift */; };
+		27ECD5932226A11100B275B9 /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD5922226A11100B275B9 /* BarChartViewController.swift */; };
 		27EEC642221ED7D0008595B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27EEC641221ED7D0008595B9 /* GoogleService-Info.plist */; };
 		27EEC644221ED933008595B9 /* CreateUserEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEC643221ED933008595B9 /* CreateUserEmailViewController.swift */; };
 		27EEC646221EF26D008595B9 /* LoginEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEC645221EF26D008595B9 /* LoginEmailViewController.swift */; };
@@ -31,6 +32,7 @@
 		27EAA693221DE27100B8887C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27EAA695221DE27100B8887C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27EAA69B221DE28500B8887C /* LvlSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LvlSystem.swift; sourceTree = "<group>"; };
+		27ECD5922226A11100B275B9 /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
 		27EEC641221ED7D0008595B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27EEC643221ED933008595B9 /* CreateUserEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserEmailViewController.swift; sourceTree = "<group>"; };
 		27EEC645221EF26D008595B9 /* LoginEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEmailViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				27EAA687221DE27000B8887C /* AppDelegate.swift */,
 				27EAA689221DE27000B8887C /* FirstViewController.swift */,
 				27EAA69B221DE28500B8887C /* LvlSystem.swift */,
+				27ECD5922226A11100B275B9 /* BarChartViewController.swift */,
 				27EAA68B221DE27000B8887C /* SecondViewController.swift */,
 				27EAA68D221DE27000B8887C /* Main.storyboard */,
 				27EEC647221EFC83008595B9 /* StartPageViewController.swift */,
@@ -207,6 +210,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Motivator1/Pods-Motivator1-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -216,6 +220,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -238,6 +243,7 @@
 				27EAA69C221DE28500B8887C /* LvlSystem.swift in Sources */,
 				27EEC646221EF26D008595B9 /* LoginEmailViewController.swift in Sources */,
 				27EAA688221DE27000B8887C /* AppDelegate.swift in Sources */,
+				27ECD5932226A11100B275B9 /* BarChartViewController.swift in Sources */,
 				27EAA68A221DE27000B8887C /* FirstViewController.swift in Sources */,
 				27EEC648221EFC83008595B9 /* StartPageViewController.swift in Sources */,
 			);

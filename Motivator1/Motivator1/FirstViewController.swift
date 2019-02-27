@@ -45,6 +45,11 @@ class FirstViewController: UIViewController {
         
     }
     
+    
+    @IBAction func BarButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "GoBar", sender: nil)
+    }
+    
     func setFields(){
         print("total xp is \(lvlSystem.xp)")
         Lvl.text = "\(lvlSystem.getLvl())"
