@@ -12,11 +12,46 @@ import Charts
 class BarChartViewController: UIViewController {
 
     @IBOutlet weak var BarChart: BarChartView!
+    
+    let months = ["Jan", "Feb", "Mar",
+                  "Apr", "May", "Jun",
+                  "Jul", "Aug", "Sep",
+                  "Oct", "Nov", "Dec"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        updateChartData()
+        //BarChart.delegate = self
+        
+        BarChart.chartDescription?.enabled = false
+        
+        BarChart.drawBarShadowEnabled = false
+        BarChart.highlightFullBarEnabled = false
+        
+        
+        
+        let l = BarChart.legend
+        l.wordWrapEnabled = true
+        l.horizontalAlignment = .center
+        l.verticalAlignment = .bottom
+        l.orientation = .horizontal
+        l.drawInside = false
+        //        chartView.legend = l
+        
+        let rightAxis = BarChart.rightAxis
+        rightAxis.axisMinimum = 0
+        
+        let leftAxis = BarChart.leftAxis
+        leftAxis.axisMinimum = 0
+        
+        let xAxis = BarChart.xAxis
+        xAxis.labelPosition = .bothSided
+        xAxis.axisMinimum = 0
+        xAxis.granularity = 1
+        xAxis.valueFormatter = self
+        
+        self.updateChartData()
     }
     func updateChartData(){
         let entry1 = BarChartDataEntry(x: 1, y: 6.6)
@@ -42,4 +77,9 @@ class BarChartViewController: UIViewController {
     }
     */
 
+}
+extension BarChartViewController: IAxisValueFormatter {
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return months[Int(value) % months.count]
+    }
 }
