@@ -9,12 +9,27 @@
 import Foundation
 
 class KcalAchivement {
-    let daysArray = [2,4,6,9,13,17,25,31,46,65,85,115,155,230,300,900]
+    let daysArray = [0,2,4,6,9,13,17,25,31,46,65,85,115,155,230,300,900]
     var days = 0
     var kcal: Int
     
     init(kcal: Int) {
         self.kcal = kcal
+    }
+    
+    func previous() -> Int {
+        var previous = 0
+        for i in 0 ..< daysArray.count{
+            if (daysArray[i] > days){
+                previous = daysArray[i-1]
+                break
+            }
+        }
+        return previous
+    }
+    
+    func progress() -> Float {
+        return Float(days/Next())
     }
     
     func Next() -> Int {

@@ -15,11 +15,48 @@ struct cellData {
 }
 class AchivmentTableViewController: UITableViewController {
 
+    var user = User()
+    
     var cellDataArray = [cellData]()
+    
+    
     override func viewDidLoad() {
-        cellDataArray = [cellData(message: "test1", progress: 0.3, progressText: "1/3"),
-                         cellData(message: "test2", progress: 0.5, progressText: "1/4"),
-                         cellData(message: "test3", progress: 0.7, progressText: "1/5")]
+        
+        fillArray()
+        
+    }
+    
+    func fillArray(){
+        var tempCellData = cellData(message: "Don't eat fast food", progress: user.foodAchiv.progress(), progressText: "\(user.foodAchiv.days)/\(user.foodAchiv.Next())")
+        cellDataArray.append(tempCellData)
+        
+        tempCellData = cellData(message: "Don't drink soda", progress: user.sodaAchive.progress(), progressText: "\(user.sodaAchive.days)/\(user.sodaAchive.Next())")
+        cellDataArray.append(tempCellData)
+        
+        tempCellData = cellData(message: "Don't eat candy", progress: user.candyAchive.progress(), progressText: "\(user.candyAchive.days)/\(user.candyAchive.Next())")
+        cellDataArray.append(tempCellData)
+        
+        tempCellData = cellData(message: "Don't smoke cigarettes", progress: user.cigiAchive.progress(), progressText: "\(user.cigiAchive.days)/\(user.cigiAchive.Next())")
+        cellDataArray.append(tempCellData)
+        
+        tempCellData = cellData(message: "Don't vape", progress: user.vapeAchive.progress(), progressText: "\(user.vapeAchive.days)/\(user.vapeAchive.Next())")
+        cellDataArray.append(tempCellData)
+        
+        tempCellData = cellData(message: "Burn over 100 Kcal", progress: user.over100Achive.progress(), progressText: "\(user.over100Achive.days)/\(user.over100Achive.Next())")
+        cellDataArray.append(tempCellData)
+        
+        tempCellData = cellData(message: "Burn over 200 Kcal", progress: user.over200Achive.progress(), progressText: "\(user.over200Achive.days)/\(user.over200Achive.Next())")
+        cellDataArray.append(tempCellData)
+        
+        tempCellData = cellData(message: "Burn over 300 Kcal", progress: user.over300Achive.progress(), progressText: "\(user.over300Achive.days)/\(user.over300Achive.Next())")
+        cellDataArray.append(tempCellData)
+        
+        tempCellData = cellData(message: "Burn over 400 Kcal", progress: user.over400Achvie.progress(), progressText: "\(user.over400Achvie.days)/\(user.over400Achvie.Next())")
+        cellDataArray.append(tempCellData)
+        
+        tempCellData = cellData(message: "Burn over 500 Kcal", progress: user.over500Achive.progress(), progressText: "\(user.over500Achive.days)/\(user.over500Achive.Next())")
+        cellDataArray.append(tempCellData)
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -61,6 +61,7 @@ class LvlSystem{
     
     func addDalyXp(newXp: Double){
         dalyXp = dalyXp + newXp
+        addXp(newXp: newXp)
     }
     
 }

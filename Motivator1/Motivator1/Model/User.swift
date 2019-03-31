@@ -25,8 +25,13 @@ class User {
     let over400Achvie = KcalAchivement(kcal: 400)
     let over500Achive = KcalAchivement(kcal: 500)
     
-    func User(){
+    func overKcalIncrumet(){
+        if(lvlSystem.dalyXp > 100){
+            over100Achive.days = over100Achive.days + 1
+            if(over100Achive.Achived()){
+                lvlSystem.addDalyXp(newXp: over100Achive.Reward())
+            }
+        print("over 100 days = \(over100Achive.days)")
+        }
     }
-    
-    
 }

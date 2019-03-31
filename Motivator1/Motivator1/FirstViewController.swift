@@ -12,6 +12,7 @@ import FirebaseAuth
 
 class FirstViewController: UIViewController {
 
+   
     let user = User()
     //new shapelayer
     //let shapeLayer = CAShapeLayer()
@@ -33,6 +34,7 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         formatter.dateFormat = "dd-MM-yyyy"
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,6 +86,7 @@ class FirstViewController: UIViewController {
             saveXp()
             //animateCircle()
             setFields()
+            user.overKcalIncrumet()
         }
     }
 
@@ -178,7 +181,10 @@ class FirstViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let Achivment = segue.destination as! AchivmentTableViewController
+        Achivment.user = user
+    }
 
 }
 

@@ -9,10 +9,24 @@
 import Foundation
 
 class NormAchivement: Achivements {
-    let daysArray = [3,5,7,10,14,20,30,45,60,80,110,150,200,365,1000]
+    
+    let daysArray = [0,3,5,7,10,14,20,30,45,60,80,110,150,200,365,1000]
     var days = 0
     
+    func previous() -> Int {
+        var previous = 0
+        for i in 0 ..< daysArray.count{
+            if (daysArray[i] > days){
+                previous = daysArray[i-1]
+                break
+            }
+        }
+        return previous
+    }
     
+    func progress() -> Float {
+        return Float(days/Next())
+    }
     
     func Next() -> Int {
         var next = 0
@@ -37,6 +51,7 @@ class NormAchivement: Achivements {
         }
         return false
     }
+    
     
     
 }
