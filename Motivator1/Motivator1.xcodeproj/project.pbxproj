@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		278B63C02251143800E50209 /* AchivmentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B63BF2251143800E50209 /* AchivmentTableViewController.swift */; };
+		278B63C32251147800E50209 /* AchivmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B63C12251147800E50209 /* AchivmentTableViewCell.swift */; };
+		278B63C42251147800E50209 /* AchivmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278B63C22251147800E50209 /* AchivmentTableViewCell.xib */; };
 		27EAA688221DE27000B8887C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EAA687221DE27000B8887C /* AppDelegate.swift */; };
 		27EAA68A221DE27000B8887C /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EAA689221DE27000B8887C /* FirstViewController.swift */; };
 		27EAA68C221DE27000B8887C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EAA68B221DE27000B8887C /* SecondViewController.swift */; };
@@ -15,6 +18,10 @@
 		27EAA694221DE27100B8887C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27EAA692221DE27100B8887C /* LaunchScreen.storyboard */; };
 		27EAA69C221DE28500B8887C /* LvlSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EAA69B221DE28500B8887C /* LvlSystem.swift */; };
 		27ECD5932226A11100B275B9 /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD5922226A11100B275B9 /* BarChartViewController.swift */; };
+		27ECD59C224D080100B275B9 /* Achivements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD59B224D080100B275B9 /* Achivements.swift */; };
+		27ECD59E224D0BB700B275B9 /* NormAchivement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD59D224D0BB700B275B9 /* NormAchivement.swift */; };
+		27ECD5A0224F8FAE00B275B9 /* KcalAchivement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD59F224F8FAE00B275B9 /* KcalAchivement.swift */; };
+		27ECD5A2224F920400B275B9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD5A1224F920400B275B9 /* User.swift */; };
 		27EEC642221ED7D0008595B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27EEC641221ED7D0008595B9 /* GoogleService-Info.plist */; };
 		27EEC644221ED933008595B9 /* CreateUserEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEC643221ED933008595B9 /* CreateUserEmailViewController.swift */; };
 		27EEC646221EF26D008595B9 /* LoginEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEC645221EF26D008595B9 /* LoginEmailViewController.swift */; };
@@ -23,6 +30,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		278B63BF2251143800E50209 /* AchivmentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivmentTableViewController.swift; sourceTree = "<group>"; };
+		278B63C12251147800E50209 /* AchivmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivmentTableViewCell.swift; sourceTree = "<group>"; };
+		278B63C22251147800E50209 /* AchivmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchivmentTableViewCell.xib; sourceTree = "<group>"; };
 		27EAA684221DE27000B8887C /* Motivator1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Motivator1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EAA687221DE27000B8887C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27EAA689221DE27000B8887C /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -33,6 +43,10 @@
 		27EAA695221DE27100B8887C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27EAA69B221DE28500B8887C /* LvlSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LvlSystem.swift; sourceTree = "<group>"; };
 		27ECD5922226A11100B275B9 /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
+		27ECD59B224D080100B275B9 /* Achivements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achivements.swift; sourceTree = "<group>"; };
+		27ECD59D224D0BB700B275B9 /* NormAchivement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormAchivement.swift; sourceTree = "<group>"; };
+		27ECD59F224F8FAE00B275B9 /* KcalAchivement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KcalAchivement.swift; sourceTree = "<group>"; };
+		27ECD5A1224F920400B275B9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		27EEC641221ED7D0008595B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27EEC643221ED933008595B9 /* CreateUserEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserEmailViewController.swift; sourceTree = "<group>"; };
 		27EEC645221EF26D008595B9 /* LoginEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEmailViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +68,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2723A5C422511A3D000AA8F6 /* Achivment */ = {
+			isa = PBXGroup;
+			children = (
+				278B63BF2251143800E50209 /* AchivmentTableViewController.swift */,
+				278B63C12251147800E50209 /* AchivmentTableViewCell.swift */,
+				278B63C22251147800E50209 /* AchivmentTableViewCell.xib */,
+			);
+			path = Achivment;
+			sourceTree = "<group>";
+		};
 		27EAA67B221DE27000B8887C = {
 			isa = PBXGroup;
 			children = (
@@ -75,21 +99,42 @@
 		27EAA686221DE27000B8887C /* Motivator1 */ = {
 			isa = PBXGroup;
 			children = (
+				2723A5C422511A3D000AA8F6 /* Achivment */,
+				27ECD5A3224FA96C00B275B9 /* Login */,
+				27ECD59A224D043800B275B9 /* Model */,
 				27EAA687221DE27000B8887C /* AppDelegate.swift */,
 				27EAA689221DE27000B8887C /* FirstViewController.swift */,
-				27EAA69B221DE28500B8887C /* LvlSystem.swift */,
 				27ECD5922226A11100B275B9 /* BarChartViewController.swift */,
 				27EAA68B221DE27000B8887C /* SecondViewController.swift */,
 				27EAA68D221DE27000B8887C /* Main.storyboard */,
-				27EEC647221EFC83008595B9 /* StartPageViewController.swift */,
-				27EEC645221EF26D008595B9 /* LoginEmailViewController.swift */,
-				27EEC643221ED933008595B9 /* CreateUserEmailViewController.swift */,
 				27EAA690221DE27100B8887C /* Assets.xcassets */,
 				27EAA692221DE27100B8887C /* LaunchScreen.storyboard */,
 				27EAA695221DE27100B8887C /* Info.plist */,
 				27EEC641221ED7D0008595B9 /* GoogleService-Info.plist */,
 			);
 			path = Motivator1;
+			sourceTree = "<group>";
+		};
+		27ECD59A224D043800B275B9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				27EAA69B221DE28500B8887C /* LvlSystem.swift */,
+				27ECD59B224D080100B275B9 /* Achivements.swift */,
+				27ECD59D224D0BB700B275B9 /* NormAchivement.swift */,
+				27ECD59F224F8FAE00B275B9 /* KcalAchivement.swift */,
+				27ECD5A1224F920400B275B9 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		27ECD5A3224FA96C00B275B9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				27EEC647221EFC83008595B9 /* StartPageViewController.swift */,
+				27EEC645221EF26D008595B9 /* LoginEmailViewController.swift */,
+				27EEC643221ED933008595B9 /* CreateUserEmailViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		4396F78F462592EC47F70D58 /* Frameworks */ = {
@@ -169,6 +214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				278B63C42251147800E50209 /* AchivmentTableViewCell.xib in Resources */,
 				27EAA694221DE27100B8887C /* LaunchScreen.storyboard in Resources */,
 				27EAA691221DE27100B8887C /* Assets.xcassets in Resources */,
 				27EAA68F221DE27000B8887C /* Main.storyboard in Resources */,
@@ -238,11 +284,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				278B63C02251143800E50209 /* AchivmentTableViewController.swift in Sources */,
 				27EAA68C221DE27000B8887C /* SecondViewController.swift in Sources */,
 				27EEC644221ED933008595B9 /* CreateUserEmailViewController.swift in Sources */,
+				27ECD59C224D080100B275B9 /* Achivements.swift in Sources */,
 				27EAA69C221DE28500B8887C /* LvlSystem.swift in Sources */,
 				27EEC646221EF26D008595B9 /* LoginEmailViewController.swift in Sources */,
+				27ECD59E224D0BB700B275B9 /* NormAchivement.swift in Sources */,
+				278B63C32251147800E50209 /* AchivmentTableViewCell.swift in Sources */,
 				27EAA688221DE27000B8887C /* AppDelegate.swift in Sources */,
+				27ECD5A0224F8FAE00B275B9 /* KcalAchivement.swift in Sources */,
+				27ECD5A2224F920400B275B9 /* User.swift in Sources */,
 				27ECD5932226A11100B275B9 /* BarChartViewController.swift in Sources */,
 				27EAA68A221DE27000B8887C /* FirstViewController.swift in Sources */,
 				27EEC648221EFC83008595B9 /* StartPageViewController.swift in Sources */,

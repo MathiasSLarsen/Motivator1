@@ -12,7 +12,7 @@ import FirebaseAuth
 
 class FirstViewController: UIViewController {
 
-    var lvlSystem = LvlSystem()
+    let user = User()
     //new shapelayer
     //let shapeLayer = CAShapeLayer()
     let formatter = DateFormatter()
@@ -51,11 +51,11 @@ class FirstViewController: UIViewController {
     }
     
     func setFields(){
-        print("total xp is \(lvlSystem.xp)")
-        Lvl.text = "\(lvlSystem.getLvl())"
-        XpRemaning.text = "\(lvlSystem.xpRemaningToNextLvl()) xp remaning for next lvl"
-        ProgressBar.setProgress(Float(lvlSystem.progress()), animated: true)
-        print("progress is \(lvlSystem.progress())")
+        print("total xp is \(user.lvlSystem.xp)")
+        Lvl.text = "\(user.lvlSystem.getLvl())"
+        XpRemaning.text = "\(user.lvlSystem.xpRemaningToNextLvl()) xp remaning for next lvl"
+        ProgressBar.setProgress(Float(user.lvlSystem.progress()), animated: true)
+        print("progress is \(user.lvlSystem.progress())")
         //animateCircle()
     }
     
@@ -74,12 +74,12 @@ class FirstViewController: UIViewController {
     @IBAction func SubmitButton(_ sender: Any) {
         
         if let newxp = Double(XpInput.text!){
-            lvlSystem.addXp(newXp: newxp)
-            if (formatter.string(from: Date()) == lvlSystem.date){
-                lvlSystem.addDalyXp(newXp: newxp)
+            user.lvlSystem.addXp(newXp: newxp)
+            if (formatter.string(from: Date()) == user.lvlSystem.date){
+                user.lvlSystem.addDalyXp(newXp: newxp)
             }else{
-                lvlSystem.dalyXp = newxp
-                lvlSystem.date = formatter.string(from: Date())
+                user.lvlSystem.dalyXp = newxp
+                user.lvlSystem.date = formatter.string(from: Date())
             }
             saveXp()
             //animateCircle()
@@ -152,8 +152,8 @@ class FirstViewController: UIViewController {
     
     func saveXp(){
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        ref.child("users").child(uid).child("xp").child("totalXp").setValue(lvlSystem.xp)
-        ref.child("users").child(uid).child("xp").child(formatter.string(from: Date())).setValue(lvlSystem.dalyXp)
+        ref.child("users").child(uid).child("xp").child("totalXp").setValue(user.lvlSystem.xp)
+        ref.child("users").child(uid).child("xp").child(formatter.string(from: Date())).setValue(user.lvlSystem.dalyXp)
     }
     
     func getXp(){
@@ -168,7 +168,7 @@ class FirstViewController: UIViewController {
                 //self.ref.child("users").child(uid!).child("xp").setValue(self.lvlSystem.xp)
                 value = 0.0
             }
-            self.lvlSystem.xp = value!
+            self.user.lvlSystem.xp = value!
             
             OperationQueue.main.addOperation {
                 self.setFields()
