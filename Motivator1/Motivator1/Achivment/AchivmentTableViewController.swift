@@ -9,13 +9,13 @@
 import UIKit
 
 struct cellData {
-    let message : String!
-    let progress : Float!
-    let progressText : String!
+    let message : String?
+    let progress : Float?
+    let progressText : String?
 }
 class AchivmentTableViewController: UITableViewController {
 
-    var user = User()
+    var user = User.user
     
     var cellDataArray = [cellData]()
     
@@ -67,9 +67,9 @@ class AchivmentTableViewController: UITableViewController {
         
         let cell = Bundle.main.loadNibNamed("AchivmentTableViewCell", owner: self, options: nil)?.first as! AchivmentTableViewCell
         
-        cell.messageLable.text = cellDataArray[indexPath.row].message
-        cell.progressBar.progress = cellDataArray[indexPath.row].progress
-        cell.progressLable.text = cellDataArray[indexPath.row].progressText
+        cell.messageLable.text = cellDataArray[indexPath.row].message!
+        cell.progressBar.progress = cellDataArray[indexPath.row].progress!
+        cell.progressLable.text = cellDataArray[indexPath.row].progressText!
         
         return cell
     }

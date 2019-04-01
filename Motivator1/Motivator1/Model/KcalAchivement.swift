@@ -29,7 +29,11 @@ class KcalAchivement {
     }
     
     func progress() -> Float {
-        return Float(days/Next())
+        let top = Float(days)
+        let buttom = Float(Next())
+        let progress = Float(top/buttom)
+        print("\(progress) days = \(days) next = \(Next())")
+        return progress
     }
     
     func Next() -> Int {

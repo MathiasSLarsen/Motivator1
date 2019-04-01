@@ -13,7 +13,7 @@ import FirebaseAuth
 class FirstViewController: UIViewController {
 
    
-    let user = User()
+    let user = User.user
     //new shapelayer
     //let shapeLayer = CAShapeLayer()
     let formatter = DateFormatter()
