@@ -12,6 +12,7 @@ class KcalAchivement {
     let daysArray = [0,2,4,6,9,13,17,25,31,46,65,85,115,155,230,300,900]
     var days = 0
     var kcal: Int
+    var date = "03-03-2019"
     
     init(kcal: Int) {
         self.kcal = kcal
@@ -58,6 +59,19 @@ class KcalAchivement {
             }
         }
         return false
+    }
+    
+    func getDate() -> String{
+        return date
+    }
+    func setDate(date: String) {
+        self.date = date
+    }
+    func getDays() -> Int{
+        return days
+    }
+    func setDays(days: Int) {
+        self.days = days
     }
 
 }

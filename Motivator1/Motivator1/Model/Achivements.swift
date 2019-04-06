@@ -9,6 +9,8 @@
 import Foundation
 
 protocol Achivements {
+    var date: String { get set }
+    var days: Int {get set}
     
     func Next() ->Int
     func Reward() ->Double

@@ -13,7 +13,7 @@ import FirebaseAuth
 class FirstViewController: UIViewController {
 
    
-    let user = User.user
+    var user = User.user
     //new shapelayer
     //let shapeLayer = CAShapeLayer()
     let formatter = DateFormatter()
@@ -34,6 +34,8 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         formatter.dateFormat = "dd-MM-yyyy"
+        user.fillArray()
+        user.checkDate()
         
     }
     

@@ -10,8 +10,11 @@ import Foundation
 
 class NormAchivement: Achivements {
     
+    
     let daysArray = [0,3,5,7,10,14,20,30,45,60,80,110,150,200,365,1000]
     var days = 0
+    var date = "04-03-2019"
+    
     
     func previous() -> Int {
         var previous = 0
@@ -25,7 +28,11 @@ class NormAchivement: Achivements {
     }
     
     func progress() -> Float {
-        return Float(days/Next())
+        let top = Float(days)
+        let buttom = Float(Next())
+        let progress = Float(top/buttom)
+        print("\(progress) days = \(days) next = \(Next())")
+        return progress
     }
     
     func Next() -> Int {
@@ -52,6 +59,18 @@ class NormAchivement: Achivements {
         return false
     }
     
+    func getDate() -> String{
+    return date
+    }
+    func setDate(date: String) {
+        self.date = date
+    }
+    func getDays() -> Int{
+        return days
+    }
+    func setDays(days: Int) {
+        self.days = days
+    }
     
     
 }
