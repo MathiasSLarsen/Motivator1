@@ -13,6 +13,7 @@ struct User {
     static let user = User()
     var username = ""
     var reward = 50.0
+    var kcal = 0.0
     
     let formatter = DateFormatter()
     
@@ -33,6 +34,7 @@ struct User {
     let over500Achive = KcalAchivement(kcal: 500)
     
     let toDay = Date()
+    let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
     
     mutating func fillArray(){
         normAchiveArray.append(foodAchiv)
@@ -50,7 +52,7 @@ struct User {
     func overKcalIncrumet(){
         formatter.dateFormat = "dd-MM-yyyy"
 
-        if(lvlSystem.dalyXp > 100 && !over100Achive.date.elementsEqual(formatter.string(from: toDay))){
+        if(kcal > 100 && !over100Achive.date.elementsEqual(formatter.string(from: toDay))){
             over100Achive.days = over100Achive.days + 1
             over100Achive.date = formatter.string(from: toDay)
             if(over100Achive.Achived()){
@@ -59,7 +61,7 @@ struct User {
         print("over 100 days = \(over100Achive.days)")
         }
     
-        if(lvlSystem.dalyXp > 200 && !over200Achive.date.elementsEqual(formatter.string(from: toDay))){
+        if(kcal > 200 && !over200Achive.date.elementsEqual(formatter.string(from: toDay))){
             over200Achive.days = over200Achive.days + 1
             over200Achive.date = formatter.string(from: toDay)
             if(over200Achive.Achived()){
@@ -68,7 +70,7 @@ struct User {
             print("over 200 days = \(over200Achive.days)")
         }
         
-        if(lvlSystem.dalyXp > 300 && !over300Achive.date.elementsEqual(formatter.string(from: toDay))){
+        if(kcal > 300 && !over300Achive.date.elementsEqual(formatter.string(from: toDay))){
             over300Achive.days = over300Achive.days + 1
             over300Achive.date = formatter.string(from: toDay)
             if(over300Achive.Achived()){
@@ -77,7 +79,7 @@ struct User {
             print("over 300 days = \(over300Achive.days)")
         }
         
-        if(lvlSystem.dalyXp > 400 && !over400Achvie.date.elementsEqual(formatter.string(from: toDay))){
+        if(kcal > 400 && !over400Achvie.date.elementsEqual(formatter.string(from: toDay))){
             over400Achvie.days = over400Achvie.days + 1
             over400Achvie.date = formatter.string(from: toDay)
             if(over400Achvie.Achived()){
@@ -86,7 +88,7 @@ struct User {
             print("over 400 days = \(over400Achvie.days)")
         }
         
-        if(lvlSystem.dalyXp > 500 && !over500Achive.date.elementsEqual(formatter.string(from: toDay))){
+        if(kcal > 500 && !over500Achive.date.elementsEqual(formatter.string(from: toDay))){
             over500Achive.days = over500Achive.days + 1
             over500Achive.date = formatter.string(from: toDay)
             if(over500Achive.Achived()){
@@ -96,48 +98,93 @@ struct User {
         }
     }
     
-    func foodAchiveIncrument(){
+    func foodAchiveIncrument() -> Double{
         if(!foodAchiv.date.elementsEqual(formatter.string(from: toDay)) ){
             foodAchiv.date = formatter.string(from: toDay)
             foodAchiv.days = foodAchiv.days + 1
             print(lvlSystem.xp)
             lvlSystem.addDalyXp(newXp: reward)
             print(lvlSystem.xp)
+            return reward
         }
+        return 0.0
     }
     
-    func candyAchiveIncrument(){
+    func candyAchiveIncrument() -> Double{
         print(candyAchive.days)
         if(!candyAchive.date.elementsEqual(formatter.string(from: toDay)) ){
             candyAchive.date = formatter.string(from: toDay)
             candyAchive.days = candyAchive.days + 1
             lvlSystem.addDalyXp(newXp: reward)
             print(candyAchive.days)
+            return reward
         }
+        return 0.0
     }
     
-    func sodaAchiveIncrument(){
+    func sodaAchiveIncrument() -> Double{
         if(!sodaAchive.date.elementsEqual(formatter.string(from: toDay)) ){
             sodaAchive.date = formatter.string(from: toDay)
             sodaAchive.days = sodaAchive.days + 1
             lvlSystem.addDalyXp(newXp: reward)
+            return reward
         }
+        return 0.0
     }
     
-    func cigiAchiveIncrument(){
+    func cigiAchiveIncrument() -> Double{
         if(!cigiAchive.date.elementsEqual(formatter.string(from: toDay)) ){
             cigiAchive.date = formatter.string(from: toDay)
             cigiAchive.days = cigiAchive.days + 1
             lvlSystem.addDalyXp(newXp: reward)
+            return reward
         }
+        return 0.0
     }
     
-    func vapeAchiveIncrument(){
+    func vapeAchiveIncrument() -> Double{
         if(!vapeAchive.date.elementsEqual(formatter.string(from: toDay)) ){
             vapeAchive.date = formatter.string(from: toDay)
             vapeAchive.days = vapeAchive.days + 1
             lvlSystem.addDalyXp(newXp: reward)
+            return reward
         }
+        return 0.0
+    }
+    
+    func foodAchiveDecrument() -> Double{
+        foodAchiv.days = foodAchiv.days - 1
+        foodAchiv.date = formatter.string(from: yesterday!)
+        lvlSystem.addDalyXp(newXp: -reward)
+        return -reward
+    }
+    
+    func candyAchiveDecrument() -> Double{
+        candyAchive.days = candyAchive.days - 1
+        candyAchive.date = formatter.string(from: yesterday!)
+        lvlSystem.addDalyXp(newXp: -reward)
+        return -reward
+    }
+    
+    func sodaAchiveDecrument() -> Double{
+        sodaAchive.days = sodaAchive.days - 1
+        sodaAchive.date = formatter.string(from: yesterday!)
+        lvlSystem.addDalyXp(newXp: -reward)
+        return -reward
+    }
+    
+    func cigiAchiveDecrument() -> Double{
+        cigiAchive.days = cigiAchive.days - 1
+        cigiAchive.date = formatter.string(from: yesterday!)
+        lvlSystem.addDalyXp(newXp: -reward)
+        return -reward
+    }
+    
+    func vapeAchiveDecrument() -> Double{
+        vapeAchive.days = vapeAchive.days - 1
+        vapeAchive.date = formatter.string(from: yesterday!)
+        lvlSystem.addDalyXp(newXp: -reward)
+        return -reward
     }
     
     mutating func checkDate(){
@@ -146,12 +193,18 @@ struct User {
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: toDay)
         
         for i in 0...normAchiveArray.count-1{
-            if(!normAchiveArray[i].date.elementsEqual(formatter.string(from: yesterday!)) && !normAchiveArray[i].date.elementsEqual(formatter.string(from: toDay))){
+            if(normAchiveArray[i].date.elementsEqual(formatter.string(from: yesterday!)) || normAchiveArray[i].date.elementsEqual(formatter.string(from: toDay))){
+                print("day ok")
+            }else{
                 normAchiveArray[i].days = 0
+                print("day not ok \(normAchiveArray[i].days) ")
             }
         }
         for i in 0...kcalAchiveArray.count-1{
-            if(!kcalAchiveArray[i].date.elementsEqual(formatter.string(from: yesterday!)) && !kcalAchiveArray[i].date.elementsEqual(formatter.string(from: toDay))){
+            if(kcalAchiveArray[i].date.elementsEqual(formatter.string(from: yesterday!)) || kcalAchiveArray[i].date.elementsEqual(formatter.string(from: toDay))){
+                print("day ok")
+            }else{
+                print("day not ok")
                 kcalAchiveArray[i].days = 0
             }
         }

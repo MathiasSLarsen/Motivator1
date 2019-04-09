@@ -192,7 +192,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arq-Hd-Xm0">
                                                 <rect key="frame" x="284" y="0.0" width="71" height="50"/>
                                                 <state key="normal" title="Button" image="unchecked-checkbox"/>
-                                                <state key="selected" image="checked-checkbox"/>
                                                 <connections>
                                                     <action selector="foodButton:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="jsp-nY-P5v"/>
                                                 </connections>
@@ -307,8 +306,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="candyBox" destination="u9h-OP-tpm" id="UUp-WY-cvn"/>
+                        <outlet property="cigiBox" destination="oOe-UB-wpL" id="zYX-Qn-uBe"/>
+                        <outlet property="foodBox" destination="arq-Hd-Xm0" id="DiU-ik-YGy"/>
                         <outlet property="kcalInput" destination="cYQ-C7-bYR" id="ZEa-ct-pOP"/>
                         <outlet property="messageLable" destination="vVw-5N-ZHo" id="LNN-Wg-yGu"/>
+                        <outlet property="sodaBox" destination="7Ld-lC-DEN" id="gne-6X-WRm"/>
+                        <outlet property="vapeBox" destination="bOg-l7-Wr0" id="tFZ-dn-zXs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

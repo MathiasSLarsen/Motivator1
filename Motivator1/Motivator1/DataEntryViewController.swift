@@ -18,66 +18,78 @@ class SecondViewController: UIViewController {
     var cigi = false
     var vape = false
     
-    var ref = Database.database().reference()
-    let formatter = DateFormatter()
+    var checkBox = UIImage(named: "checked-checkbox")
+    var unCheckBox = UIImage(named: "unchecked-checkbox")
     
-    var reward = 50.0
+    let formatter = DateFormatter()
+    let toDay = Date()
     
     var user = User.user
+    var firebase = Firebase.firebase
     
     
     @IBOutlet weak var kcalInput: UITextField!
+    
+    @IBOutlet weak var foodBox: UIButton!
+    
+    @IBOutlet weak var candyBox: UIButton!
+    
+    @IBOutlet weak var sodaBox: UIButton!
+    
+    @IBOutlet weak var cigiBox: UIButton!
+    
+    @IBOutlet weak var vapeBox: UIButton!
     
     
     @IBOutlet weak var messageLable: UILabel!
     
     @IBAction func foodButton(_ sender: UIButton) {
-        if(sender.isSelected){
-            sender.isSelected = false
+        if(food){
+            foodBox.setImage(unCheckBox, for: .normal)
             food = false
         }else{
-            sender.isSelected = true
+            foodBox.setImage(checkBox, for: .normal)
             food = true
         }
     }
     
     @IBAction func candyButton(_ sender: UIButton) {
-        if(sender.isSelected){
-            sender.isSelected = false
+        if(candy){
+            candyBox.setImage(unCheckBox, for: .normal)
             candy = false
         }else{
-            sender.isSelected = true
+            candyBox.setImage(checkBox, for: .normal)
             candy = true
         }
     }
     
     
     @IBAction func sodaButton(_ sender: UIButton) {
-        if(sender.isSelected){
-            sender.isSelected = false
+        if(soda){
+            sodaBox.setImage(unCheckBox, for: .normal)
             soda = false
         }else{
-            sender.isSelected = true
+            sodaBox.setImage(checkBox, for: .normal)
             soda = true
         }
     }
     
     @IBAction func cigiButton(_ sender: UIButton) {
-        if(sender.isSelected){
-            sender.isSelected = false
+        if(cigi){
+            cigiBox.setImage(unCheckBox, for: .normal)
             cigi = false
         }else{
-            sender.isSelected = true
+            cigiBox.setImage(checkBox, for: .normal)
             cigi = true
         }
     }
     
     @IBAction func vapeButton(_ sender: UIButton) {
-        if(sender.isSelected){
-            sender.isSelected = false
+        if(vape){
+            vapeBox.setImage(unCheckBox, for: .normal)
             vape = false
         }else{
-            sender.isSelected = true
+            vapeBox.setImage(checkBox, for: .normal)
             vape = true
         }
     }
@@ -85,51 +97,75 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         formatter.dateFormat = "dd-MM-yyyy"
+        setFields()
 
     }
-    
-    func saveXp(){
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        ref.child("users").child(uid).child("xp").child("totalXp").setValue(user.lvlSystem.xp)
-        ref.child("users").child(uid).child("xp").child(formatter.string(from: Date())).setValue(user.lvlSystem.dalyXp)
+    func setFields(){
+        if(user.foodAchiv.date == formatter.string(from: Date())){
+            food = true
+            foodBox.setImage(checkBox, for: .normal)
+        }
+        if(user.candyAchive.date == formatter.string(from: Date())){
+            candy = true
+            candyBox.setImage(checkBox, for: .normal)
+        }
+        if(user.sodaAchive.date == formatter.string(from: Date())){
+            soda = true
+            sodaBox.setImage(checkBox, for: .normal)
+        }
+        if(user.cigiAchive.date == formatter.string(from: Date())){
+            cigi = true
+            cigiBox.setImage(checkBox, for: .normal)
+        }
+        if(user.vapeAchive.date == formatter.string(from: Date())){
+            vape = true
+            vapeBox.setImage(checkBox, for: .normal)
+        }
     }
 
     @IBAction func submitButton(_ sender: Any) {
         var newXp = 0.0
         if(food){
-            user.foodAchiveIncrument()
-            newXp = newXp + 50
+            newXp = newXp + user.foodAchiveIncrument()
+        }else if(!food && user.foodAchiv.date.elementsEqual(formatter.string(from: toDay))){
+            newXp = newXp + user.foodAchiveDecrument()
         }
         if(candy){
-            user.candyAchiveIncrument()
-            newXp = newXp + 50
+            newXp = newXp + user.candyAchiveIncrument()
+        }else if (!candy && user.candyAchive.date.elementsEqual(formatter.string(from: toDay))){
+            newXp = newXp + user.candyAchiveDecrument()
         }
         if(soda){
-            user.sodaAchiveIncrument()
-            newXp = newXp + 50
+            newXp = newXp + user.sodaAchiveIncrument()
+        }else if (!soda && user.sodaAchive.date.elementsEqual(formatter.string(from: toDay))){
+            newXp = newXp + user.sodaAchiveDecrument()
         }
         if(cigi){
-            user.cigiAchiveIncrument()
-            newXp = newXp + 50
+            newXp = newXp + user.cigiAchiveIncrument()
+        }else if (!cigi && user.cigiAchive.date.elementsEqual(formatter.string(from: toDay))){
+            newXp = newXp + user.cigiAchiveDecrument()
         }
         if(vape){
-            user.vapeAchiveIncrument()
-            newXp = newXp + 50
+            newXp = newXp + user.vapeAchiveIncrument()
+        }else if (!vape && user.vapeAchive.date.elementsEqual(formatter.string(from: toDay))){
+            newXp = newXp + user.vapeAchiveDecrument()
         }
         
         if let newKcalxp = Double(kcalInput.text!){
             newXp = newXp + newKcalxp
-            user.lvlSystem.addXp(newXp: newKcalxp)
+            user.kcal = user.kcal + newKcalxp
             if (formatter.string(from: Date()) == user.lvlSystem.date){
                 user.lvlSystem.addDalyXp(newXp: newKcalxp)
             }else{
-                user.lvlSystem.dalyXp = newKcalxp
+                user.lvlSystem.dalyXp = 0
+                user.lvlSystem.addDalyXp(newXp: newKcalxp)
                 user.lvlSystem.date = formatter.string(from: Date())
             }
         }
         messageLable.text = "You gained \(newXp) xp"
         user.overKcalIncrumet()
-        saveXp()
+        firebase.saveXp()
+        firebase.saveAchivements()
     }
     
 }
