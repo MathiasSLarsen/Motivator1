@@ -20,11 +20,25 @@ class AchivmentTableViewController: UITableViewController {
     var cellDataArray = [cellData]()
     
     
+    @IBOutlet var appTableView: UITableView!
+    
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
+       
+        fillArray()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        print("candy days \(user.candyAchive.days)")
+        print("elements in array \(cellDataArray.count)")
+        cellDataArray.removeAll()
+        print("elements in array \(cellDataArray.count)")
         
         fillArray()
-        
+        print("elements in array \(cellDataArray.count)")
+        self.tableView.reloadData()
     }
+    
     
     func fillArray(){
         var tempCellData = cellData(message: "Don't eat fast food", progress: user.foodAchiv.progress(), progressText: "\(user.foodAchiv.days)/\(user.foodAchiv.Next())")

@@ -102,9 +102,7 @@ struct User {
         if(!foodAchiv.date.elementsEqual(formatter.string(from: toDay)) ){
             foodAchiv.date = formatter.string(from: toDay)
             foodAchiv.days = foodAchiv.days + 1
-            print(lvlSystem.xp)
             lvlSystem.addDalyXp(newXp: reward)
-            print(lvlSystem.xp)
             return reward
         }
         return 0.0

@@ -4,6 +4,10 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>der er en meget god grund</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>der er en meget god grund</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

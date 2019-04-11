@@ -343,6 +343,10 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="mbS-fN-G0y"/>
+                    <connections>
+                        <outlet property="appTableView" destination="l2C-sL-X1X" id="0q9-UK-THi"/>
+                        <outlet property="tableView" destination="l2C-sL-X1X" id="mcG-54-jcc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hmF-KF-1En" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

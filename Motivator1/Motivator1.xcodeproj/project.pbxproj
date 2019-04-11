@@ -27,6 +27,7 @@
 		27EEC646221EF26D008595B9 /* LoginEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEC645221EF26D008595B9 /* LoginEmailViewController.swift */; };
 		27EEC648221EFC83008595B9 /* StartPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEC647221EFC83008595B9 /* StartPageViewController.swift */; };
 		27FD98DB225A0A9200FAA8FF /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD98DA225A0A9200FAA8FF /* Firebase.swift */; };
+		27FD98E4225F961A00FAA8FF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FD98E3225F961A00FAA8FF /* HealthKit.framework */; };
 		A5C0240DE2B4D6950B6A2931 /* Pods_Motivator1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DE9BEEEBE2862C9C935A0B /* Pods_Motivator1.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,8 @@
 		27EEC645221EF26D008595B9 /* LoginEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEmailViewController.swift; sourceTree = "<group>"; };
 		27EEC647221EFC83008595B9 /* StartPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageViewController.swift; sourceTree = "<group>"; };
 		27FD98DA225A0A9200FAA8FF /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
+		27FD98DC225F841100FAA8FF /* Motivator1.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Motivator1.entitlements; sourceTree = "<group>"; };
+		27FD98E3225F961A00FAA8FF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		3A16EE85105BD93AB1211D06 /* Pods-Motivator1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Motivator1.release.xcconfig"; path = "Target Support Files/Pods-Motivator1/Pods-Motivator1.release.xcconfig"; sourceTree = "<group>"; };
 		A3DE9BEEEBE2862C9C935A0B /* Pods_Motivator1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Motivator1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE69E66D0F0F94CE896DEF1D /* Pods-Motivator1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Motivator1.debug.xcconfig"; path = "Target Support Files/Pods-Motivator1/Pods-Motivator1.debug.xcconfig"; sourceTree = "<group>"; };
@@ -64,6 +67,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5C0240DE2B4D6950B6A2931 /* Pods_Motivator1.framework in Frameworks */,
+				27FD98E4225F961A00FAA8FF /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +105,7 @@
 		27EAA686221DE27000B8887C /* Motivator1 */ = {
 			isa = PBXGroup;
 			children = (
+				27FD98DC225F841100FAA8FF /* Motivator1.entitlements */,
 				2723A5C422511A3D000AA8F6 /* Achivment */,
 				27ECD5A3224FA96C00B275B9 /* Login */,
 				27ECD59A224D043800B275B9 /* Model */,
@@ -143,6 +148,7 @@
 		4396F78F462592EC47F70D58 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27FD98E3225F961A00FAA8FF /* HealthKit.framework */,
 				A3DE9BEEEBE2862C9C935A0B /* Pods_Motivator1.framework */,
 			);
 			name = Frameworks;
@@ -191,6 +197,11 @@
 				TargetAttributes = {
 					27EAA683221DE27000B8887C = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -448,7 +459,9 @@
 			baseConfigurationReference = FE69E66D0F0F94CE896DEF1D /* Pods-Motivator1.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Motivator1/Motivator1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YBYNY687C9;
 				INFOPLIST_FILE = Motivator1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -466,7 +479,9 @@
 			baseConfigurationReference = 3A16EE85105BD93AB1211D06 /* Pods-Motivator1.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Motivator1/Motivator1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YBYNY687C9;
 				INFOPLIST_FILE = Motivator1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

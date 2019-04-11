@@ -9,9 +9,11 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import HealthKit
 
 class FirstViewController: UIViewController {
 
+    let healthKitStore:HKHealthStore = HKHealthStore()
    
     var user = User.user
     var firebase = Firebase.firebase
@@ -27,6 +29,39 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var XpInput: UITextField!
     @IBOutlet weak var ProgressBar: UIProgressView!
     
+    func authHealthKit(){
+        let healtheKitTypsToRead: Set<HKQuantityType> = [
+            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!]
+        
+        let healthKitTypesToWrite: Set<HKSampleType> = []
+        
+        if !HKHealthStore.isHealthDataAvailable(){
+            print("Error occured")
+        }
+        
+        healthKitStore.requestAuthorization(toShare: healthKitTypesToWrite, read: healtheKitTypsToRead){ (succes, error)-> Void in
+            print("succes")
+        }
+    }
+    
+    func getAutoKcal(){
+        var kcal: Double
+        
+        let kcalType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!
+        
+        let query = HKSampleQuery(sampleType: kcalType, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) {(query, result, error)in
+            if let result = result?.last as? HKQuantitySample{
+                print("kcal = \(result.quantity)")
+                DispatchQueue.main.async(execute: {() -> Void in
+                    self.XpInput.text = "\(result.quantity)"
+                });
+                
+            }else{
+                print("\(String(describing: result)), error = \(String(describing: error))")
+            }
+        }
+        healthKitStore.execute(query)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +70,8 @@ class FirstViewController: UIViewController {
         firebase.getAchivments()
         formatter.dateFormat = "dd-MM-yyyy"
         user.fillArray()
+        authHealthKit()
+        getAutoKcal()
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500), execute: {
