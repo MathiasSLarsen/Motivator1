@@ -31,11 +31,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="143" translatesAutoresizingMaskIntoConstraints="NO" id="Swn-cg-bqv">
-                                <rect key="frame" x="0.0" y="117" width="375" height="272.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="143" translatesAutoresizingMaskIntoConstraints="NO" id="Swn-cg-bqv">
+                                <rect key="frame" x="0.0" y="167" width="375" height="304"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="PL1-af-Fmn">
-                                        <rect key="frame" x="112.5" y="0.0" width="150" height="99.5"/>
+                                        <rect key="frame" x="112.5" y="0.0" width="150" height="131"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are lvl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OY1-gW-7Zg">
                                                 <rect key="frame" x="36" y="0.0" width="78.5" height="20.5"/>
@@ -64,10 +64,16 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 kcal auto added" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lR-kq-pJ2" userLabel="auto Kcal">
+                                                <rect key="frame" x="7" y="110.5" width="136.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="HHO-HH-MDv">
-                                        <rect key="frame" x="134" y="242.5" width="107" height="30"/>
+                                        <rect key="frame" x="134" y="274" width="107" height="30"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ajE-KC-5St">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
@@ -109,6 +115,7 @@
                         <outlet property="ProgressBar" destination="8af-xy-15N" id="X8c-8G-tGW"/>
                         <outlet property="XpInput" destination="ajE-KC-5St" id="iRt-nj-AhC"/>
                         <outlet property="XpRemaning" destination="lyv-E1-pH9" id="g4e-dQ-c2d"/>
+                        <outlet property="autoKcalLable" destination="3lR-kq-pJ2" id="UKV-Oo-OI0"/>
                         <segue destination="WYC-bR-DJ3" kind="show" identifier="GoBar" id="KYU-4R-z6L"/>
                     </connections>
                 </viewController>

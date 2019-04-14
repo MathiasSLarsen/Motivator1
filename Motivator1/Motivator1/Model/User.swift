@@ -13,13 +13,14 @@ struct User {
     static let user = User()
     var username = ""
     var reward = 50.0
-    var kcal = 0.0
+    
     
     let formatter = DateFormatter()
     
     var normAchiveArray = [NormAchivement]()
     var kcalAchiveArray = [KcalAchivement]()
     let lvlSystem = LvlSystem()
+    let kcal = Kcal()
     
     let foodAchiv = NormAchivement()
     let candyAchive = NormAchivement()
@@ -52,7 +53,7 @@ struct User {
     func overKcalIncrumet(){
         formatter.dateFormat = "dd-MM-yyyy"
 
-        if(kcal > 100 && !over100Achive.date.elementsEqual(formatter.string(from: toDay))){
+        if(kcal.kcal > 100 && !over100Achive.date.elementsEqual(formatter.string(from: toDay))){
             over100Achive.days = over100Achive.days + 1
             over100Achive.date = formatter.string(from: toDay)
             if(over100Achive.Achived()){
@@ -61,7 +62,7 @@ struct User {
         print("over 100 days = \(over100Achive.days)")
         }
     
-        if(kcal > 200 && !over200Achive.date.elementsEqual(formatter.string(from: toDay))){
+        if(kcal.kcal > 200 && !over200Achive.date.elementsEqual(formatter.string(from: toDay))){
             over200Achive.days = over200Achive.days + 1
             over200Achive.date = formatter.string(from: toDay)
             if(over200Achive.Achived()){
@@ -70,7 +71,7 @@ struct User {
             print("over 200 days = \(over200Achive.days)")
         }
         
-        if(kcal > 300 && !over300Achive.date.elementsEqual(formatter.string(from: toDay))){
+        if(kcal.kcal > 300 && !over300Achive.date.elementsEqual(formatter.string(from: toDay))){
             over300Achive.days = over300Achive.days + 1
             over300Achive.date = formatter.string(from: toDay)
             if(over300Achive.Achived()){
@@ -79,7 +80,7 @@ struct User {
             print("over 300 days = \(over300Achive.days)")
         }
         
-        if(kcal > 400 && !over400Achvie.date.elementsEqual(formatter.string(from: toDay))){
+        if(kcal.kcal > 400 && !over400Achvie.date.elementsEqual(formatter.string(from: toDay))){
             over400Achvie.days = over400Achvie.days + 1
             over400Achvie.date = formatter.string(from: toDay)
             if(over400Achvie.Achived()){
@@ -88,7 +89,7 @@ struct User {
             print("over 400 days = \(over400Achvie.days)")
         }
         
-        if(kcal > 500 && !over500Achive.date.elementsEqual(formatter.string(from: toDay))){
+        if(kcal.kcal > 500 && !over500Achive.date.elementsEqual(formatter.string(from: toDay))){
             over500Achive.days = over500Achive.days + 1
             over500Achive.date = formatter.string(from: toDay)
             if(over500Achive.Achived()){

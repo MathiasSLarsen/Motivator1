@@ -24,6 +24,12 @@ struct Firebase {
         ref.child("users").child(uid).child("xp").child(formatter.string(from: Date())).setValue(user.lvlSystem.dalyXp)
     }
     
+    func saveKcal(){
+        let uid = Auth.auth().currentUser?.uid
+        ref.child("users").child(uid!).child("kcal").child("value").setValue(user.kcal.kcal)
+        ref.child("users").child(uid!).child("kcal").child("date").setValue(user.kcal.date)
+    }
+    
     func saveAchivements(){
         formatter.dateFormat = "dd-MM-yyyy"
         let uid = Auth.auth().currentUser?.uid
@@ -163,17 +169,34 @@ struct Firebase {
             //if the value does not excist in database create it and set to 0.0
             if value == nil {
                 self.saveXp()
-                //self.ref.child("users").child(uid!).child("xp").setValue(self.lvlSystem.xp)
                 value = 0.0
             }
             self.user.lvlSystem.xp = value!
-            
-            OperationQueue.main.addOperation {
-               // self.setFields()
-            }
-            // ...
+
         }) { (error) in
             print(error.localizedDescription)
         }
     }
+    func getKcal(){
+        let uid = Auth.auth().currentUser?.uid
+        ref.child("users").child(uid!).child("kcal").child("value").observeSingleEvent(of: .value, with: { (snapshot) in
+            var value = snapshot.value as? Double
+            
+            if value == nil {
+                self.saveKcal()
+                value = 0.0
+            }
+            self.user.kcal.kcal = value!
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        ref.child("users").child(uid!).child("kcal").child("date").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? String
+            self.user.kcal.date = value!
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
 }

@@ -153,7 +153,7 @@ class SecondViewController: UIViewController {
         
         if let newKcalxp = Double(kcalInput.text!){
             newXp = newXp + newKcalxp
-            user.kcal = user.kcal + newKcalxp
+            user.kcal.kcal = user.kcal.kcal + newKcalxp
             if (formatter.string(from: Date()) == user.lvlSystem.date){
                 user.lvlSystem.addDalyXp(newXp: newKcalxp)
             }else{

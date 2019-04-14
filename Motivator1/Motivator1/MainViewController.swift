@@ -14,24 +14,19 @@ import HealthKit
 class FirstViewController: UIViewController {
 
     let healthKitStore:HKHealthStore = HKHealthStore()
-   
     var user = User.user
     var firebase = Firebase.firebase
-    //new shapelayer
-    //let shapeLayer = CAShapeLayer()
     let formatter = DateFormatter()
-    
-    
     var ref = Database.database().reference()
     
     @IBOutlet weak var Lvl: UILabel!
     @IBOutlet weak var XpRemaning: UILabel!
     @IBOutlet weak var XpInput: UITextField!
     @IBOutlet weak var ProgressBar: UIProgressView!
+    @IBOutlet weak var autoKcalLable: UILabel!
     
     func authHealthKit(){
-        let healtheKitTypsToRead: Set<HKQuantityType> = [
-            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!]
+        let healtheKitTypsToRead: Set<HKObjectType> = [ HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!]
         
         let healthKitTypesToWrite: Set<HKSampleType> = []
         
@@ -44,23 +39,80 @@ class FirstViewController: UIViewController {
         }
     }
     
-    func getAutoKcal(){
-        var kcal: Double
+    func test() -> Double{
+        var kcal = 0.0
+        let calendar = Calendar.autoupdatingCurrent
+        
+        var dateComponents = calendar.dateComponents(
+            [ .year, .month, .day ],
+            from: Date()
+        )
+        
+        // This line is required to make the whole thing work
+        dateComponents.calendar = calendar
+        
+        let predicate = HKQuery.predicateForActivitySummary(with: dateComponents)
+        
+        let query = HKActivitySummaryQuery(predicate: predicate) { (query, summaries, error) in
+            
+            guard let summaries = summaries, summaries.count > 0
+                else {
+                    // No data returned. Perhaps check for error
+                    print("no data")
+                    return
+            }
+            
+            // Handle the activity rings data here
+            let energiUnit = HKUnit.kilocalorie()
+            let summary = summaries.first
+            kcal = (summary?.activeEnergyBurned.doubleValue(for: energiUnit))!
+            print("kcal er = \(kcal)")
+        }
+        healthKitStore.execute(query)
+        return kcal
+
+    }
+    func getAutoKcal()->Double{
+        var kcal = 0.0
+        let calender = Calendar.autoupdatingCurrent
+        var dateComponents = calender.dateComponents([.year, .month, .day], from: Date())
+        dateComponents.calendar = calender
+        let predicate = HKQuery.predicateForSamples(withStart: Date(), end: Date(), options: .strictEndDate)
         
         let kcalType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!
         
-        let query = HKSampleQuery(sampleType: kcalType, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) {(query, result, error)in
-            if let result = result?.last as? HKQuantitySample{
-                print("kcal = \(result.quantity)")
-                DispatchQueue.main.async(execute: {() -> Void in
-                    self.XpInput.text = "\(result.quantity)"
-                });
-                
-            }else{
-                print("\(String(describing: result)), error = \(String(describing: error))")
+        
+        let query = HKSampleQuery(sampleType: kcalType, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) {(query, results, error) in
+            
+            for i in 0...results!.count - 1 {
+                if let result = results?[i] as? HKQuantitySample {
+                    kcal = kcal + result.quantity.doubleValue(for: HKUnit.kilocalorie())
+                    print("kcal = \(kcal)")
+                }else{
+                    print("fejl i for loop")
+                }
             }
+            DispatchQueue.main.async(execute: {() -> Void in
+                self.autoKcalLable.text = "\(kcal)"
+                
+            })
+            /*
+            if let results = results?.last as? HKQuantitySample{
+                
+                print("kcal = \(results.quantity)")
+                kcal = results.quantity.doubleValue(for: HKUnit.kilocalorie())
+                DispatchQueue.main.async(execute: {() -> Void in
+                    self.XpInput.text = "\(kcal)"
+                    self.autoKcalLable.text = String(kcal)
+                });
+ 
+            }else{
+                print("\(String(describing: results)), error = \(String(describing: error))")
+            }
+ */
         }
         healthKitStore.execute(query)
+        return kcal
     }
     
     override func viewDidLoad() {
@@ -68,13 +120,15 @@ class FirstViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         firebase.getXp()
         firebase.getAchivments()
+        firebase.getKcal()
         formatter.dateFormat = "dd-MM-yyyy"
         user.fillArray()
         authHealthKit()
-        getAutoKcal()
+        self.autoKcalLable.text = String(self.getAutoKcal())
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500), execute: {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
             self.setFields()
             self.user.checkDate()
         })
