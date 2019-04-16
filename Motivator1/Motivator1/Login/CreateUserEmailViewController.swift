@@ -12,6 +12,7 @@ import Firebase
 
 class CreateUserViewController: UIViewController {
 
+    let firebase = Firebase.firebase
     @IBOutlet weak var txtEmail: UITextField!
     
     @IBOutlet weak var txtPass: UITextField!
@@ -43,6 +44,9 @@ class CreateUserViewController: UIViewController {
                         }
                     }
                 }
+                self.firebase.saveAchivements()
+                self.firebase.saveKcal()
+                self.firebase.saveXp()
                 self.performSegue(withIdentifier: "GoHome", sender: self)
             }
         }

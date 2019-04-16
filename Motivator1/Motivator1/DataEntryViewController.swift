@@ -124,31 +124,86 @@ class SecondViewController: UIViewController {
             vapeBox.setImage(checkBox, for: .normal)
         }
     }
+    
+    func createAlert(title: String, message: String){
+        let aleat = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        aleat.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
+        }))
+        
+        self.present(aleat, animated: true, completion: nil)
+    }
 
     @IBAction func submitButton(_ sender: Any) {
         var newXp = 0.0
+        let title = "Achievment Unlocked"
+        
         if(food){
             newXp = newXp + user.foodAchiveIncrument()
+            if user.foodAchiv.Achived() && !user.foodAchiv.rewardReceived{
+                newXp = newXp + user.foodAchiv.Reward()
+                user.foodAchiv.rewardReceived = true
+                createAlert(title: title, message: "You have not eaten fast food for \(user.foodAchiv.days) days, your reward is \(user.foodAchiv.Reward())!")
+            }
+            if !user.foodAchiv.Achived(){
+                user.foodAchiv.rewardReceived = false
+            }
         }else if(!food && user.foodAchiv.date.elementsEqual(formatter.string(from: toDay))){
             newXp = newXp + user.foodAchiveDecrument()
         }
+        
         if(candy){
             newXp = newXp + user.candyAchiveIncrument()
+            if user.candyAchive.Achived() && !user.candyAchive.rewardReceived{
+                newXp = newXp + user.candyAchive.Reward()
+                user.candyAchive.rewardReceived = true
+                createAlert(title: title, message: "You have not eaten candy for \(user.candyAchive.days) days, your reward is \(user.candyAchive.Reward())!")
+            }
+            if !user.candyAchive.Achived(){
+                user.candyAchive.rewardReceived = false
+            }
         }else if (!candy && user.candyAchive.date.elementsEqual(formatter.string(from: toDay))){
             newXp = newXp + user.candyAchiveDecrument()
         }
+        
         if(soda){
             newXp = newXp + user.sodaAchiveIncrument()
+            if user.sodaAchive.Achived() && !user.sodaAchive.rewardReceived{
+                newXp = newXp + user.sodaAchive.Reward()
+                user.sodaAchive.rewardReceived = true
+                createAlert(title: title, message: "You did not drink soda for \(user.sodaAchive.days) days, you reward is \(user.sodaAchive.Reward())!")
+            }
+            if !user.sodaAchive.Achived(){
+                user.sodaAchive.rewardReceived = false
+            }
         }else if (!soda && user.sodaAchive.date.elementsEqual(formatter.string(from: toDay))){
             newXp = newXp + user.sodaAchiveDecrument()
         }
+        
         if(cigi){
             newXp = newXp + user.cigiAchiveIncrument()
+            if user.cigiAchive.Achived() && !user.cigiAchive.rewardReceived{
+                newXp = newXp + user.cigiAchive.Reward()
+                user.cigiAchive.rewardReceived = true
+                createAlert(title: title, message: "You did not smoke cigarettes for \(user.cigiAchive.days) days, you reward is \(user.cigiAchive.Reward())!")
+            }
+            if !user.cigiAchive.Achived(){
+                user.cigiAchive.rewardReceived = false
+            }
         }else if (!cigi && user.cigiAchive.date.elementsEqual(formatter.string(from: toDay))){
             newXp = newXp + user.cigiAchiveDecrument()
         }
+        
         if(vape){
             newXp = newXp + user.vapeAchiveIncrument()
+            if user.vapeAchive.Achived() && !user.vapeAchive.rewardReceived{
+                newXp = newXp + user.vapeAchive.Reward()
+                user.vapeAchive.rewardReceived = true
+                createAlert(title: title, message: "You did not vape for \(user.vapeAchive.days) days, your reward is \(user.vapeAchive.Reward())")
+            }
+            if !user.vapeAchive.Achived(){
+                user.vapeAchive.rewardReceived = false
+            }
         }else if (!vape && user.vapeAchive.date.elementsEqual(formatter.string(from: toDay))){
             newXp = newXp + user.vapeAchiveDecrument()
         }
@@ -164,6 +219,10 @@ class SecondViewController: UIViewController {
                 user.lvlSystem.addDalyXp(newXp: newKcalxp)
                 user.lvlSystem.date = formatter.string(from: Date())
             }
+            //indsæt code her
+        }
+        if user.lvlSystem.didLvlChange(){
+            createAlert(title: "Lvl Up", message: "Congratulations you are now lvl \(user.lvlSystem.lvl)")
         }
         messageLable.text = "You gained \(newXp) xp"
         user.overKcalIncrumet()

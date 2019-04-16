@@ -13,6 +13,7 @@ class KcalAchivement {
     var days = 0
     var kcal: Int
     var date = "03-03-2019"
+    var rewardRecieved = false
     
     init(kcal: Int) {
         self.kcal = kcal

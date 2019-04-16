@@ -14,6 +14,7 @@ class NormAchivement: Achivements {
     let daysArray = [0,3,5,7,10,14,20,30,45,60,80,110,150,200,365,1000]
     var days = 0
     var date = "04-03-2019"
+    var rewardReceived = false
     
     
     func previous() -> Int {

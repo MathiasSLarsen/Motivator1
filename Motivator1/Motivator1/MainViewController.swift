@@ -40,11 +40,17 @@ class FirstViewController: UIViewController {
         healthKit.getAutoKcal()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+            self.user.lvlSystem.setLvl()
             self.user.lvlSystem.addDalyXp(newXp: self.user.kcal.kcalDiff(newDate: self.formatter.string(from: Date())))
+            
+            if self.user.lvlSystem.didLvlChange(){
+                self.createLvlAlert()
+            }
             self.setFields()
             self.user.checkDate()
             self.user.overKcalIncrumet()
             self.firebase.saveKcal()
+            self.firebase.saveXp()
             
         })
         
@@ -55,13 +61,22 @@ class FirstViewController: UIViewController {
         setFields()
     }
     
+    func createLvlAlert(){
+        let aleat = UIAlertController(title: "Level Up", message: "Congratulations you are now lvl \(user.lvlSystem.lvl)", preferredStyle: UIAlertController.Style.alert)
+        
+        aleat.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
+        }))
+        
+        self.present(aleat, animated: true, completion: nil)
+    }
+    
     @IBAction func BarButton(_ sender: Any) {
         self.performSegue(withIdentifier: "GoBar", sender: nil)
     }
     
     func setFields(){
         print("total xp is \(user.lvlSystem.xp)")
-        Lvl.text = "\(user.lvlSystem.getLvl())"
+        Lvl.text = "\(user.lvlSystem.lvl)"
         XpRemaning.text = "\(user.lvlSystem.xpRemaningToNextLvl()) xp remaning for next lvl"
         ProgressBar.setProgress(Float(user.lvlSystem.progress()), animated: true)
         print("progress is \(user.lvlSystem.progress())")
