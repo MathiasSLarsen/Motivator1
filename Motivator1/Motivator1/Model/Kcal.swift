@@ -10,22 +10,19 @@ import Foundation
 
 class Kcal{
     var kcal = 0.0
+    var newKcal = 0.0
     var date = "20-02-2019"
 
-    func kcalDiff(newkcal: Double, newDate: String)-> Double{
+    func kcalDiff(newDate: String)-> Double{
         var kcalDiff = 0.0
         if date.elementsEqual(newDate){
-            kcalDiff = newkcal - kcal
-            kcal = newkcal
+            kcalDiff = newKcal - kcal
+            kcal = newKcal
             return kcalDiff
         }else{
-            kcal = newkcal
+            kcal = newKcal
             date = newDate
             return kcal
         }
-        
-        
-        return newkcal - kcal
-        
     }
 }

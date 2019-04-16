@@ -29,6 +29,7 @@
 		27FD98DB225A0A9200FAA8FF /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD98DA225A0A9200FAA8FF /* Firebase.swift */; };
 		27FD98E4225F961A00FAA8FF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FD98E3225F961A00FAA8FF /* HealthKit.framework */; };
 		27FD98E622621A8600FAA8FF /* Kcal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD98E522621A8600FAA8FF /* Kcal.swift */; };
+		27FD98E82265EEBF00FAA8FF /* HealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD98E72265EEBF00FAA8FF /* HealthKit.swift */; };
 		A5C0240DE2B4D6950B6A2931 /* Pods_Motivator1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DE9BEEEBE2862C9C935A0B /* Pods_Motivator1.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		27FD98DC225F841100FAA8FF /* Motivator1.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Motivator1.entitlements; sourceTree = "<group>"; };
 		27FD98E3225F961A00FAA8FF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		27FD98E522621A8600FAA8FF /* Kcal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kcal.swift; sourceTree = "<group>"; };
+		27FD98E72265EEBF00FAA8FF /* HealthKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKit.swift; sourceTree = "<group>"; };
 		3A16EE85105BD93AB1211D06 /* Pods-Motivator1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Motivator1.release.xcconfig"; path = "Target Support Files/Pods-Motivator1/Pods-Motivator1.release.xcconfig"; sourceTree = "<group>"; };
 		A3DE9BEEEBE2862C9C935A0B /* Pods_Motivator1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Motivator1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE69E66D0F0F94CE896DEF1D /* Pods-Motivator1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Motivator1.debug.xcconfig"; path = "Target Support Files/Pods-Motivator1/Pods-Motivator1.debug.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				27ECD5A1224F920400B275B9 /* User.swift */,
 				27FD98DA225A0A9200FAA8FF /* Firebase.swift */,
 				27FD98E522621A8600FAA8FF /* Kcal.swift */,
+				27FD98E72265EEBF00FAA8FF /* HealthKit.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				27ECD5932226A11100B275B9 /* BarChartViewController.swift in Sources */,
 				27EAA68A221DE27000B8887C /* MainViewController.swift in Sources */,
 				27EEC648221EFC83008595B9 /* StartPageViewController.swift in Sources */,
+				27FD98E82265EEBF00FAA8FF /* HealthKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

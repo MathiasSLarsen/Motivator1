@@ -26,6 +26,7 @@ class SecondViewController: UIViewController {
     
     var user = User.user
     var firebase = Firebase.firebase
+    var healthKit = HealthKit.healthKit
     
     
     @IBOutlet weak var kcalInput: UITextField!
@@ -100,6 +101,7 @@ class SecondViewController: UIViewController {
         setFields()
 
     }
+    
     func setFields(){
         if(user.foodAchiv.date == formatter.string(from: Date())){
             food = true
@@ -154,6 +156,7 @@ class SecondViewController: UIViewController {
         if let newKcalxp = Double(kcalInput.text!){
             newXp = newXp + newKcalxp
             user.kcal.kcal = user.kcal.kcal + newKcalxp
+            healthKit.saveAutoKcal(newKcal: newKcalxp)
             if (formatter.string(from: Date()) == user.lvlSystem.date){
                 user.lvlSystem.addDalyXp(newXp: newKcalxp)
             }else{
@@ -166,6 +169,7 @@ class SecondViewController: UIViewController {
         user.overKcalIncrumet()
         firebase.saveXp()
         firebase.saveAchivements()
+        firebase.saveKcal()
     }
     
 }
