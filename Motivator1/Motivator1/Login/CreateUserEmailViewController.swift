@@ -33,7 +33,6 @@ class CreateUserViewController: UIViewController {
                 print("der er sket en fejl")
             }else{
                 //user registered successfully
-                print(result)
                 
                 Auth.auth().signIn(withEmail: (self.txtEmail.text ?? ""), password: (self.txtPass.text ?? "")) { (result, error) in
                     if let _eror = error{

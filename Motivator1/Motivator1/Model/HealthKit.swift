@@ -37,7 +37,7 @@ struct HealthKit {
             
             let sample = HKQuantitySample(type: type, quantity: quantity, start: Date(), end: Date())
             healthKitStore.save(sample, withCompletion: { (success, error) in
-                print("saved \(success), error \(error)")
+                print("saved \(success), error \(String(describing: error))")
             })
         }
     }
