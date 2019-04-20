@@ -81,7 +81,7 @@ class BarChartViewController: UIViewController {
     }
     
     func setChartData(){
-        let calender = Calendar.current
+        //let calender = Calendar.current
         let now = Date()
         let formater1 = DateFormatter()
         formater1.dateFormat = "dd-MM-yyyy"

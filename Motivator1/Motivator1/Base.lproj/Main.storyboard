@@ -32,7 +32,7 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="143" translatesAutoresizingMaskIntoConstraints="NO" id="Swn-cg-bqv">
-                                <rect key="frame" x="0.0" y="167" width="375" height="304"/>
+                                <rect key="frame" x="0.0" y="253.5" width="375" height="131"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="PL1-af-Fmn">
                                         <rect key="frame" x="112.5" y="0.0" width="150" height="131"/>
@@ -72,29 +72,10 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="HHO-HH-MDv">
-                                        <rect key="frame" x="134" y="274" width="107" height="30"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ajE-KC-5St">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNY-x3-14R">
-                                                <rect key="frame" x="61" y="0.0" width="46" height="30"/>
-                                                <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="SubmitButton:" destination="9pv-A4-QxB" eventType="touchUpInside" id="aEJ-ug-nzC"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SiD-Tg-W5g">
-                                <rect key="frame" x="172" y="467" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SiD-Tg-W5g">
+                                <rect key="frame" x="20" y="404.5" width="335" height="30"/>
                                 <state key="normal" title="Bar"/>
                                 <connections>
                                     <action selector="BarButton:" destination="9pv-A4-QxB" eventType="touchUpInside" id="qPa-Py-hHL"/>
@@ -104,7 +85,10 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Swn-cg-bqv" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="7rB-yx-4Iz"/>
+                            <constraint firstItem="SiD-Tg-W5g" firstAttribute="top" secondItem="Swn-cg-bqv" secondAttribute="bottom" constant="20" id="ALM-UD-xnJ"/>
+                            <constraint firstItem="SiD-Tg-W5g" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="20" id="Bu6-m3-v18"/>
                             <constraint firstItem="Swn-cg-bqv" firstAttribute="centerY" secondItem="PQr-Ze-W5v" secondAttribute="centerY" id="GqD-wi-fa6"/>
+                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="SiD-Tg-W5g" secondAttribute="trailing" constant="20" id="elR-21-hXN"/>
                             <constraint firstItem="Swn-cg-bqv" firstAttribute="centerX" secondItem="PQr-Ze-W5v" secondAttribute="centerX" id="uzA-1u-gb1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
@@ -113,7 +97,6 @@
                     <connections>
                         <outlet property="Lvl" destination="kwa-yD-Vhm" id="oUB-5G-pLQ"/>
                         <outlet property="ProgressBar" destination="8af-xy-15N" id="X8c-8G-tGW"/>
-                        <outlet property="XpInput" destination="ajE-KC-5St" id="iRt-nj-AhC"/>
                         <outlet property="XpRemaning" destination="lyv-E1-pH9" id="g4e-dQ-c2d"/>
                         <outlet property="autoKcalLable" destination="3lR-kq-pJ2" id="UKV-Oo-OI0"/>
                         <segue destination="WYC-bR-DJ3" kind="show" identifier="GoBar" id="KYU-4R-z6L"/>
@@ -334,16 +317,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="cFU-pi-7QK" customClass="AchivmentTableViewCell" customModule="Motivator1" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cFU-pi-7QK" id="Bg3-Sx-5HT">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="ysI-Xs-bNv" id="REy-GF-s63"/>
                             <outlet property="delegate" destination="ysI-Xs-bNv" id="KtX-wH-Qai"/>

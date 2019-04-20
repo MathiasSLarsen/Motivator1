@@ -14,7 +14,7 @@ protocol Achivements {
     
     func Next() ->Int
     func Reward() ->Double
-    func Achived() ->Bool
+    func Achived() ->Double
     func previous() ->Int
     func progress() ->Float
     

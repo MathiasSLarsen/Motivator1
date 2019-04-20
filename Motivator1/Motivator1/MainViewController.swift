@@ -39,6 +39,7 @@ class FirstViewController: UIViewController {
         healthKit.authHealthKit()
         healthKit.getAutoKcal()
         
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
             self.user.lvlSystem.setLvl()
             self.user.lvlSystem.addDalyXp(newXp: self.user.kcal.kcalDiff(newDate: self.formatter.string(from: Date())))
@@ -47,8 +48,14 @@ class FirstViewController: UIViewController {
                 self.createLvlAlert()
             }
             self.setFields()
-            self.user.checkDate()
-            self.user.overKcalIncrumet()
+            for i in 0..<self.user.normAchiveArray.count{
+                self.user.normAchiveArray[i].checkDate()
+            }
+            for i in 0..<self.user.kcalAchiveArray.count{
+                self.user.kcalAchiveArray[i].checkDate()
+                self.user.lvlSystem.addDalyXp(newXp: self.user.kcalAchiveArray[i].Incrumet(newkcal: self.user.kcal.kcal))
+            }
+            self.firebase.saveAchivements()
             self.firebase.saveKcal()
             self.firebase.saveXp()
             
@@ -94,29 +101,5 @@ class FirstViewController: UIViewController {
         self.present(startPageVC, animated: true, completion: nil)
     }
     
-    
-    @IBAction func SubmitButton(_ sender: Any) {
-        
-        if let newxp = Double(XpInput.text!){
-            user.lvlSystem.addXp(newXp: newxp)
-            if (formatter.string(from: Date()) == user.lvlSystem.date){
-                user.lvlSystem.addDalyXp(newXp: newxp)
-            }else{
-                user.lvlSystem.dalyXp = newxp
-                user.lvlSystem.date = formatter.string(from: Date())
-            }
-            firebase.saveXp()
-            //animateCircle()
-            setFields()
-            user.overKcalIncrumet()
-        }
-    }
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let Achivment = segue.destination as! AchivmentTableViewController
-        Achivment.user = user
-    }
- */
-
 }
 
