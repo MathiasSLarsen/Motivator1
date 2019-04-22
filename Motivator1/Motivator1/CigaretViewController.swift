@@ -15,20 +15,21 @@ class CigaretViewController: UIViewController {
    
     @IBOutlet weak var chartView: CombinedChartView!
     
+    var firebase = Firebase.firebase
+    var user = User.user
+    let formatter = DateFormatter()
     var barDataEntries = [BarChartDataEntry]()
     var lineDataEntries = [ChartDataEntry]()
     var valuesArray = [Double]()
     
-    let hoursArray = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13"]
-    let months = ["Jan", "Feb", "Mar",
-                  "Apr", "May", "Jun",
-                  "Jul", "Aug", "Sep",
-                  "Oct", "Nov", "Dec"]
+    let hoursArray = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        valuesArray = [0,0,0,0,0,1,1,2,3,1,2,1,1,2,3,1,2,1,1,1,1,2,3,1]
+        firebase.getCigarets()
+        
+        valuesArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         
         chartView.chartDescription?.enabled = false
         
@@ -57,19 +58,23 @@ class CigaretViewController: UIViewController {
         xAxis.axisMinimum = 0
         xAxis.granularity = 1
         //xAxis.valueFormatter = self
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            self.updateChartData()
+        })
         
-        self.updateChartData()
     }
     
     func updateChartData() {
-        
+        for i in 0..<valuesArray.count{
+            valuesArray[i] = 0
+        }
         self.setChartData()
     }
     
     func setChartData() {
         let data = CombinedChartData()
-        data.lineData = generateLineData()
         data.barData = generateBarData()
+        data.lineData = generateLineData()
         
         chartView.xAxis.axisMaximum = data.xMax + 0.25
         
@@ -78,12 +83,14 @@ class CigaretViewController: UIViewController {
     
     
     func generateLineData() -> LineChartData {
-        for i in 0..<valuesArray.count{
+        formatter.dateFormat = "H"
+        let now = Int(formatter.string(from: Date()))
+        for i in 0...now!{
             var sum = 0
             for j in 0..<i{
                 sum = sum + Int(valuesArray[j])
             }
-            let entry = ChartDataEntry(x: Double(i), y: Double(sum))
+            let entry = ChartDataEntry(x: Double(i-1), y: Double(sum))
             lineDataEntries.append(entry)
             
         }
@@ -119,7 +126,10 @@ class CigaretViewController: UIViewController {
     }
     
     func generateBarData() -> BarChartData {
-        
+        for i in 0..<user.cigiArray.count{
+            let houre = Int(user.cigiArray[i].houre)
+            valuesArray[houre!]+=1
+        }
         for i in 0..<valuesArray.count{
             let entry = BarChartDataEntry(x: Double(i), y: valuesArray[i])
             barDataEntries.append(entry)
@@ -133,11 +143,26 @@ class CigaretViewController: UIViewController {
         
         return data
     }
+    
+    @IBAction func addCigaret(_ sender: Any) {
+        formatter.dateFormat = "dd-MM-yyyy"
+        let date = formatter.string(from: Date())
+        print(date)
+        formatter.dateFormat = "H"
+        let houre = formatter.string(from: Date())
+        print(houre)
+        let cigi = Cigaret(date: date, houre: houre)
+        user.cigiArray.append(cigi)
+        firebase.saveCigaret(cigaret: cigi)
+        
+        updateChartData()
+    }
+    
 }
-/*
+
 extension CigaretViewController: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return months[Int(value) % months.count]
+        return hoursArray[Int(value) % hoursArray.count]
     }
 }
-*/
+

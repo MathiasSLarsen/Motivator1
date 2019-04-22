@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User {
+class User {
     
     static let user = User()
     var username = ""
@@ -17,6 +17,7 @@ struct User {
     
     let formatter = DateFormatter()
     
+    var cigiArray = [Cigaret]()
     var normAchiveArray = [NormAchivement]()
     var kcalAchiveArray = [KcalAchivement]()
     let lvlSystem = LvlSystem()
@@ -37,7 +38,7 @@ struct User {
     let toDay = Date()
     let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
     
-    mutating func fillArray(){
+    func fillArray(){
         normAchiveArray.append(foodAchiv)
         normAchiveArray.append(candyAchive)
         normAchiveArray.append(sodaAchive)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		277F3B9B226DE61600DDA770 /* Cigaret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277F3B9A226DE61600DDA770 /* Cigaret.swift */; };
 		278B63C02251143800E50209 /* AchivmentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B63BF2251143800E50209 /* AchivmentTableViewController.swift */; };
 		278B63C32251147800E50209 /* AchivmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B63C12251147800E50209 /* AchivmentTableViewCell.swift */; };
 		278B63C42251147800E50209 /* AchivmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278B63C22251147800E50209 /* AchivmentTableViewCell.xib */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		277F3B9A226DE61600DDA770 /* Cigaret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cigaret.swift; sourceTree = "<group>"; };
 		278B63BF2251143800E50209 /* AchivmentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivmentTableViewController.swift; sourceTree = "<group>"; };
 		278B63C12251147800E50209 /* AchivmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivmentTableViewCell.swift; sourceTree = "<group>"; };
 		278B63C22251147800E50209 /* AchivmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchivmentTableViewCell.xib; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				27FD98DA225A0A9200FAA8FF /* Firebase.swift */,
 				27FD98E522621A8600FAA8FF /* Kcal.swift */,
 				27FD98E72265EEBF00FAA8FF /* HealthKit.swift */,
+				277F3B9A226DE61600DDA770 /* Cigaret.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				27EEC646221EF26D008595B9 /* LoginEmailViewController.swift in Sources */,
 				27ECD59E224D0BB700B275B9 /* NormAchivement.swift in Sources */,
 				278B63C32251147800E50209 /* AchivmentTableViewCell.swift in Sources */,
+				277F3B9B226DE61600DDA770 /* Cigaret.swift in Sources */,
 				27EAA688221DE27000B8887C /* AppDelegate.swift in Sources */,
 				27ECD5A0224F8FAE00B275B9 /* KcalAchivement.swift in Sources */,
 				27ECD5A2224F920400B275B9 /* User.swift in Sources */,
