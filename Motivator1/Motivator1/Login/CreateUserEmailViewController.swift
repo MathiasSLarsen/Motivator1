@@ -13,6 +13,7 @@ import Firebase
 class CreateUserViewController: UIViewController {
 
     let firebase = Firebase.firebase
+    let rest = REST.rest
     @IBOutlet weak var txtEmail: UITextField!
     
     @IBOutlet weak var txtPass: UITextField!
@@ -26,6 +27,8 @@ class CreateUserViewController: UIViewController {
     
     @IBAction func CreateUser(_ sender: Any) {
        
+        rest.createUser(username: txtEmail.text!)
+        
         Auth.auth().createUser(withEmail: (txtEmail.text ?? ""), password: (txtPass.text ?? "")) { (result, error) in
             if let _eror = error {
                 //something bad happning
@@ -43,10 +46,13 @@ class CreateUserViewController: UIViewController {
                         }
                     }
                 }
-                self.firebase.saveAchivements()
-                self.firebase.saveKcal()
-                self.firebase.saveXp()
-                self.performSegue(withIdentifier: "GoHome", sender: self)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                    self.firebase.saveAchivements()
+                    self.firebase.saveKcal()
+                    self.firebase.saveXp()
+                    self.firebase.saveDBUserId()
+                    self.performSegue(withIdentifier: "GoHome", sender: self)
+                })
             }
         }
  

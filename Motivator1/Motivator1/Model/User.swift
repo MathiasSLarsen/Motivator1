@@ -11,7 +11,7 @@ import Foundation
 class User {
     
     static let user = User()
-    var username = ""
+    var dbId = 0
     let reward = 50.0
     
     

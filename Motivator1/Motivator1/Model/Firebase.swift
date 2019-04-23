@@ -19,21 +19,30 @@ struct Firebase {
     let uid = Auth.auth().currentUser?.uid
     
     func saveCigaret(cigaret: Cigaret){
+        let uid = Auth.auth().currentUser?.uid
         ref.child("users").child(uid!).child("cigaret").child(cigaret.date).childByAutoId().setValue(cigaret.houre)
     }
     
     func saveXp(){
+        let uid = Auth.auth().currentUser?.uid
         formatter.dateFormat = "dd-MM-yyyy"
         ref.child("users").child(uid!).child("xp").child("totalXp").setValue(user.lvlSystem.xp)
         ref.child("users").child(uid!).child("xp").child(formatter.string(from: Date())).setValue(user.lvlSystem.dalyXp)
     }
     
     func saveKcal(){
+        let uid = Auth.auth().currentUser?.uid
         ref.child("users").child(uid!).child("kcal").child("value").setValue(user.kcal.kcal)
         ref.child("users").child(uid!).child("kcal").child("date").setValue(user.kcal.date)
     }
     
+    func saveDBUserId(){
+        let uid = Auth.auth().currentUser?.uid
+        ref.child("users").child(uid!).child("dbUserId").setValue(user.dbId)
+    }
+    
     func saveAchivements(){
+        let uid = Auth.auth().currentUser?.uid
         for i in 0..<user.normAchiveArray.count{
             ref.child("users").child(uid!).child("achivements").child(user.normAchiveArray[i].name).child("days").setValue(user.normAchiveArray[i].days)
             ref.child("users").child(uid!).child("achivements").child(user.normAchiveArray[i].name).child("date").setValue(user.normAchiveArray[i].date)
@@ -45,7 +54,16 @@ struct Firebase {
         }
     }
     
+    func getDBUserId(){
+        let uid = Auth.auth().currentUser?.uid
+        ref.child("users").child(uid!).child("DBUserId").observeSingleEvent(of: .value) { (snapshot) in
+            let value = snapshot.value as? Int
+            self.user.dbId = value!
+        }
+    }
+    
     func getCigarets(){
+        let uid = Auth.auth().currentUser?.uid
         formatter.dateFormat = "dd-MM-yyyy"
         ref.child("users").child(uid!).child("cigaret").child(formatter.string(from: Date())).observeSingleEvent(of: .value, with: { (snapshot) in
             for child in snapshot.children{
@@ -58,6 +76,7 @@ struct Firebase {
         })
     }
     func getAchivments(){
+        let uid = Auth.auth().currentUser?.uid
         for i in 0..<user.normAchiveArray.count{
             ref.child("users").child(uid!).child("achivements").child(user.normAchiveArray[i].name).child("days").observeSingleEvent(of: .value, with: {(snapshot) in
                 var value = snapshot.value as? Int
@@ -134,7 +153,11 @@ struct Firebase {
         }
         
         ref.child("users").child(uid!).child("kcal").child("date").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? String
+            var value = snapshot.value as? String
+            if value == nil{
+                self.saveKcal()
+                value = "01-01-2019"
+            }
             self.user.kcal.date = value!
         }) { (error) in
             print(error.localizedDescription)
