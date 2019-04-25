@@ -123,6 +123,7 @@ struct Firebase {
     
     func getXp(){
         let uid = Auth.auth().currentUser?.uid
+        formatter.dateFormat = "dd-MM-yyyy"
         ref.child("users").child(uid!).child("xp").child("totalXp").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             var value = snapshot.value as? Double
@@ -137,7 +138,7 @@ struct Firebase {
         }) { (error) in
             print(error.localizedDescription)
         }
-        /*
+        
         ref.child("users").child(uid!).child("xp").child("dailyxp").child(formatter.string(from: Date())).observeSingleEvent(of: .value) { (snapshot) in
             var value = snapshot.value as? Double
             if value == nil{
@@ -146,7 +147,7 @@ struct Firebase {
             }
             self.user.lvlSystem.dalyXp = value!
         }
- */
+ 
     }
     
     func getKcal(){

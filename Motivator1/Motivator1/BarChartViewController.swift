@@ -30,6 +30,8 @@ class BarChartViewController: UIViewController {
         BarChart.drawBarShadowEnabled = false
         BarChart.highlightFullBarEnabled = false
         
+        BarChart.noDataText = "Loading data"
+        BarChart.noDataTextColor = .white
         
         
         let l = BarChart.legend
@@ -38,21 +40,26 @@ class BarChartViewController: UIViewController {
         l.verticalAlignment = .bottom
         l.orientation = .horizontal
         l.drawInside = false
+        l.textColor = .white
         //        chartView.legend = l
         
         let rightAxis = BarChart.rightAxis
         rightAxis.axisMinimum = 0
+        rightAxis.labelTextColor = .white
         
         let leftAxis = BarChart.leftAxis
         leftAxis.axisMinimum = 0
+        leftAxis.labelTextColor = .white
         
         let xAxis = BarChart.xAxis
         xAxis.labelPosition = .bothSided
         xAxis.axisMinimum = 0
         xAxis.granularity = 1
         xAxis.valueFormatter = self
+        xAxis.labelTextColor = .white
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
             self.valuesArray.reverse()
             self.updateChartData()
         })
@@ -66,7 +73,7 @@ class BarChartViewController: UIViewController {
             dataEntries.append(entry)
         }
         
-        let dataset = BarChartDataSet(values: dataEntries, label: "hej")
+        let dataset = BarChartDataSet(values: dataEntries, label: "DailyXp")
         let data = BarChartData(dataSets: [dataset])
         BarChart.data = data
         BarChart.chartDescription?.text = "test"

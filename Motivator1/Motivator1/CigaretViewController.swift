@@ -1,10 +1,4 @@
-//
-//  CombinedChartViewController.swift
-//  ChartsDemo-iOS
-//
-//  Created by Jacob Christie on 2017-07-09.
-//  Copyright © 2017 jc. All rights reserved.
-//
+
 
 import UIKit
 import Charts
@@ -36,7 +30,8 @@ class CigaretViewController: UIViewController {
         chartView.drawBarShadowEnabled = false
         chartView.highlightFullBarEnabled = false
         
-        
+        chartView.noDataText = "Loading Data"
+        chartView.noDataTextColor = .white
         chartView.drawOrder = [DrawOrder.bar.rawValue, DrawOrder.line.rawValue]
         
         
