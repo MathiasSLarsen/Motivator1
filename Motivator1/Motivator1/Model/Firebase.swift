@@ -27,7 +27,7 @@ struct Firebase {
         let uid = Auth.auth().currentUser?.uid
         formatter.dateFormat = "dd-MM-yyyy"
         ref.child("users").child(uid!).child("xp").child("totalXp").setValue(user.lvlSystem.xp)
-        ref.child("users").child(uid!).child("xp").child(formatter.string(from: Date())).setValue(user.lvlSystem.dalyXp)
+        ref.child("users").child(uid!).child("xp").child("dailyxp").child(formatter.string(from: Date())).setValue(user.lvlSystem.dalyXp)
     }
     
     func saveKcal(){
@@ -137,7 +137,18 @@ struct Firebase {
         }) { (error) in
             print(error.localizedDescription)
         }
+        /*
+        ref.child("users").child(uid!).child("xp").child("dailyxp").child(formatter.string(from: Date())).observeSingleEvent(of: .value) { (snapshot) in
+            var value = snapshot.value as? Double
+            if value == nil{
+                self.saveXp()
+                value = 0.0
+            }
+            self.user.lvlSystem.dalyXp = value!
+        }
+ */
     }
+    
     func getKcal(){
         let uid = Auth.auth().currentUser?.uid
         ref.child("users").child(uid!).child("kcal").child("value").observeSingleEvent(of: .value, with: { (snapshot) in

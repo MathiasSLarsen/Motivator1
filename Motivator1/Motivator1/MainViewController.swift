@@ -18,6 +18,9 @@ class FirstViewController: UIViewController {
     var firebase = Firebase.firebase
     let formatter = DateFormatter()
     var ref = Database.database().reference()
+    let dishcpachgroup = DispatchGroup()
+
+    
     
     @IBOutlet weak var Lvl: UILabel!
     @IBOutlet weak var XpRemaning: UILabel!
@@ -31,16 +34,16 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.formatter.dateFormat = "dd-MM-yyyy"
+        
+        user.fillArray()
         firebase.getXp()
         firebase.getAchivments()
         firebase.getKcal()
-        formatter.dateFormat = "dd-MM-yyyy"
-        user.fillArray()
         healthKit.authHealthKit()
         healthKit.getAutoKcal()
         
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2500), execute: {
             self.user.lvlSystem.setLvl()
             self.user.lvlSystem.addDalyXp(newXp: self.user.kcal.kcalDiff(newDate: self.formatter.string(from: Date())))
             
@@ -58,14 +61,18 @@ class FirstViewController: UIViewController {
             self.firebase.saveAchivements()
             self.firebase.saveKcal()
             self.firebase.saveXp()
-            
         })
-        
+ 
+ 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setFields()
+    }
+    
+    func loadData(){
+        
     }
     
     func createLvlAlert(){

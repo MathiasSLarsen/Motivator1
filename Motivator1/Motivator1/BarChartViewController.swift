@@ -14,11 +14,6 @@ class BarChartViewController: UIViewController {
 
     @IBOutlet weak var BarChart: BarChartView!
     
-    let months = ["Jan", "Feb", "Mar",
-                  "Apr", "May", "Jun",
-                  "Jul", "Aug", "Sep",
-                  "Oct", "Nov", "Dec"]
-    
     var datesArray = [String]()
     var valuesArray = [Double]()
     var dataEntries = [BarChartDataEntry]()
@@ -96,7 +91,7 @@ class BarChartViewController: UIViewController {
             let uid = Auth.auth().currentUser?.uid
            let dateElement2 = formater1.calendar.date(byAdding: .day, value: -i, to: now)
             let dateString = formater1.string(from: dateElement2!)
-            ref.child("users").child(uid!).child("xp").child(dateString).observeSingleEvent(of: .value, with: { (snapshot) in
+            ref.child("users").child(uid!).child("xp").child("dailyxp").child(dateString).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 var value = snapshot.value as? Double
                 

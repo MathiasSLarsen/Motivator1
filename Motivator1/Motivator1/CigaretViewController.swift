@@ -37,7 +37,9 @@ class CigaretViewController: UIViewController {
         chartView.highlightFullBarEnabled = false
         
         
-        chartView.drawOrder = [DrawOrder.bar.rawValue,                       DrawOrder.line.rawValue]
+        chartView.drawOrder = [DrawOrder.bar.rawValue, DrawOrder.line.rawValue]
+        
+        
         
         let l = chartView.legend
         l.wordWrapEnabled = true
@@ -45,18 +47,25 @@ class CigaretViewController: UIViewController {
         l.verticalAlignment = .bottom
         l.orientation = .horizontal
         l.drawInside = false
+        l.textColor = .white
         //        chartView.legend = l
         
         let rightAxis = chartView.rightAxis
         rightAxis.axisMinimum = 0
+        rightAxis.axisLineColor = .white
+        rightAxis.labelTextColor = .white
         
         let leftAxis = chartView.leftAxis
         leftAxis.axisMinimum = 0
+        leftAxis.axisLineColor = .white
+        leftAxis.labelTextColor = .white
         
         let xAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.axisMinimum = 0
         xAxis.granularity = 1
+        xAxis.axisLineColor = .white
+        xAxis.labelTextColor = .white
         //xAxis.valueFormatter = self
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
             self.updateChartData()
@@ -68,6 +77,7 @@ class CigaretViewController: UIViewController {
         for i in 0..<valuesArray.count{
             valuesArray[i] = 0
         }
+        lineDataEntries.removeAll()
         self.setChartData()
     }
     
@@ -84,7 +94,8 @@ class CigaretViewController: UIViewController {
     
     func generateLineData() -> LineChartData {
         formatter.dateFormat = "H"
-        let now = Int(formatter.string(from: Date()))
+        var now = Int(formatter.string(from: Date()))
+        now = now! + 1
         for i in 0...now!{
             var sum = 0
             for j in 0..<i{
@@ -94,14 +105,29 @@ class CigaretViewController: UIViewController {
             lineDataEntries.append(entry)
             
         }
-        let dataset = LineChartDataSet(values: lineDataEntries, label: "hej")
+        let dataset = LineChartDataSet(values: lineDataEntries, label: "")
         let data = LineChartData(dataSets: [dataset])
         chartView.data = data
         chartView.chartDescription?.text = "test"
         
         chartView.notifyDataSetChanged()
+        let set = LineChartDataSet(values: lineDataEntries, label: "accumulated")
+        set.setColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
+        set.lineWidth = 2.5
+        set.setCircleColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
+        set.circleRadius = 5
+        set.circleHoleRadius = 2.5
+        set.fillColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
+        set.mode = .cubicBezier
+        set.drawValuesEnabled = true
+        set.valueFont = .systemFont(ofSize: 10)
+        set.valueTextColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
         
-        return data
+        return LineChartData(dataSet: set)
+        //return data
+        
+        
+        
         /*
         let entries = (0..<ITEM_COUNT).map { (i) -> ChartDataEntry in
             return ChartDataEntry(x: Double(i) + 0.5, y: Double(arc4random_uniform(15) + 5))
@@ -134,14 +160,30 @@ class CigaretViewController: UIViewController {
             let entry = BarChartDataEntry(x: Double(i), y: valuesArray[i])
             barDataEntries.append(entry)
         }
-        let dataset = BarChartDataSet(values: barDataEntries, label: "hej")
+        let dataset = BarChartDataSet(values: barDataEntries, label: "cigarets somked pr. hour")
         let data = BarChartData(dataSets: [dataset])
         chartView.data = data
         chartView.chartDescription?.text = "test"
         
         chartView.notifyDataSetChanged()
         
-        return data
+        let set = BarChartDataSet(values: barDataEntries, label: "cigarets somked pr. hour")
+        set.setColor(UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1))
+        //set.lineWidth = 2.5
+        //set.setCircleColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
+        //set.circleRadius = 5
+        //set.circleHoleRadius = 2.5
+        //set.fillColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
+        //set.mode = .cubicBezier
+        set.drawValuesEnabled = true
+        set.valueFont = .systemFont(ofSize: 10)
+        set.valueTextColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
+        
+        set.axisDependency = .left
+        
+        return BarChartData(dataSet: set)
+        
+        //return data
     }
     
     @IBAction func addCigaret(_ sender: Any) {
