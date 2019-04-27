@@ -17,6 +17,47 @@ struct Firebase {
     let formatter = DateFormatter()
     var user = User.user
     let uid = Auth.auth().currentUser?.uid
+    let semaphore = DispatchSemaphore(value: 0)
+    
+    /*
+    func test(userName: String, password: String, completion: @escaping (AuthDataResult?, Error?)->()) -> Bool{
+        var logedIn = false
+        Auth.auth().signIn(withEmail: userName, password: password) { (result, error) in
+            if let _eror = error{
+                completion(nil, _eror)
+                print(_eror.localizedDescription)
+            }else{
+                if let _res = result{
+                    logedIn = true
+                    completion(_res, nil)
+                    print("loged in is: \(logedIn)")
+                }
+            }
+        }
+        return logedIn
+    }
+ */
+    
+    func logIn(userName: String, password: String)-> Bool {
+        
+        var logedIn = false
+        Auth.auth().signIn(withEmail: userName, password: password) { (result, error) in
+            print("test")
+            if let _eror = error{
+                print(_eror.localizedDescription)
+                self.semaphore.signal()
+            }else{
+                if let _res = result{
+                    logedIn = true
+                    print("loged in is: \(logedIn)")
+                    self.semaphore.signal()
+                }
+            }
+            //self.semaphore.signal()
+        }
+        _ = semaphore.wait(timeout: .distantFuture)
+        return logedIn
+    }
     
     func saveCigaret(cigaret: Cigaret){
         let uid = Auth.auth().currentUser?.uid
