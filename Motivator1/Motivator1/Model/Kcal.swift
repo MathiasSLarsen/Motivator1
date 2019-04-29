@@ -15,14 +15,14 @@ class Kcal{
 
     func kcalDiff(newDate: String)-> Double{
         var kcalDiff = 0.0
-        if date.elementsEqual(newDate){
+        if !date.elementsEqual(newDate){
             kcalDiff = newKcal - kcal
             kcal = newKcal
             return kcalDiff
         }else{
             kcal = newKcal
             date = newDate
-            return kcal
+            return 0.0
         }
     }
 }

@@ -159,6 +159,8 @@ struct Firebase {
                 self.user.kcalAchiveArray[i].date = value!
             })
         }
+        print("done getting achievement")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: userSetNotification3), object: self)
     }
     
     
@@ -175,6 +177,7 @@ struct Firebase {
                 value = 0.0
             }
             self.user.lvlSystem.xp = value!
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: userSetNotification), object: self)
 
         }) { (error) in
             print(error.localizedDescription)
@@ -212,6 +215,7 @@ struct Firebase {
                 value = "01-01-2019"
             }
             self.user.kcal.date = value!
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: userSetNotification2), object: self)
         }) { (error) in
             print(error.localizedDescription)
         }

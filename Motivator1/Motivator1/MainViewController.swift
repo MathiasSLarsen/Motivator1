@@ -11,6 +11,10 @@ import FirebaseDatabase
 import FirebaseAuth
 import HealthKit
 
+    let userSetNotification = "userSetNotification"
+    let userSetNotification2 = "userSetNotification2"
+    let userSetNotification3 = "userSetNotification3"
+
 class FirstViewController: UIViewController {
 
     var user = User.user
@@ -19,6 +23,7 @@ class FirstViewController: UIViewController {
     let formatter = DateFormatter()
     var ref = Database.database().reference()
     let dishcpachgroup = DispatchGroup()
+
 
     
     
@@ -33,46 +38,61 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: userSetNotification), object: nil)
         // Do any additional setup after loading the view, typically from a nib.
         self.formatter.dateFormat = "dd-MM-yyyy"
+   
+            self.user.fillArray()
+            self.firebase.getXp()
+            self.healthKit.authHealthKit()
+            self.healthKit.getAutoKcal()
+       
+         NotificationCenter.default.addObserver(self, selector: #selector(updateAchievements), name: NSNotification.Name(rawValue: userSetNotification3), object: nil)
+            self.firebase.getAchivments()
         
-        user.fillArray()
-        firebase.getXp()
-        firebase.getAchivments()
-        firebase.getKcal()
-        healthKit.authHealthKit()
-        healthKit.getAutoKcal()
+         NotificationCenter.default.addObserver(self, selector: #selector(updateKcal), name: NSNotification.Name(rawValue: userSetNotification2), object: nil)
+            self.firebase.getKcal()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2500), execute: {
-            self.user.lvlSystem.setLvl()
-            self.user.lvlSystem.addDalyXp(newXp: self.user.kcal.kcalDiff(newDate: self.formatter.string(from: Date())))
-            
-            if self.user.lvlSystem.didLvlChange(){
-                self.createLvlAlert()
-            }
-            self.setFields()
-            for i in 0..<self.user.normAchiveArray.count{
-                self.user.normAchiveArray[i].checkDate()
-            }
-            for i in 0..<self.user.kcalAchiveArray.count{
-                self.user.kcalAchiveArray[i].checkDate()
-                self.user.lvlSystem.addDalyXp(newXp: self.user.kcalAchiveArray[i].Incrumet(newkcal: self.user.kcal.kcal))
-            }
-            self.firebase.saveAchivements()
-            self.firebase.saveKcal()
-            self.firebase.saveXp()
-        })
- 
- 
+
+    }
+    
+    @objc func updateAchievements(){
+        print("using achievements")
+        for i in 0..<self.user.normAchiveArray.count{
+            self.user.normAchiveArray[i].checkDate()
+        }
+        for i in 0..<self.user.kcalAchiveArray.count{
+            self.user.kcalAchiveArray[i].checkDate()
+            self.user.lvlSystem.addDalyXp(newXp: self.user.kcalAchiveArray[i].Incrumet(newkcal: self.user.kcal.kcal))
+        }
+        
+        self.firebase.saveAchivements()
+    }
+    
+    @objc func updateKcal(){
+        
+        self.user.lvlSystem.addDalyXp(newXp: self.user.kcal.kcalDiff(newDate: self.formatter.string(from: Date())))
+        
+        if self.user.lvlSystem.didLvlChange(){
+            self.createLvlAlert()
+        }
+        
+        setFields()
+        
+        
+        self.firebase.saveKcal()
+        self.firebase.saveXp()
+    }
+    
+    @objc func updateUI() {
+        self.user.lvlSystem.setLvl()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("viewWillAppear")
         setFields()
-    }
-    
-    func loadData(){
-        
     }
     
     func createLvlAlert(){
@@ -89,12 +109,16 @@ class FirstViewController: UIViewController {
     }
     
     func setFields(){
-        print("total xp is \(user.lvlSystem.xp)")
-        Lvl.text = "\(user.lvlSystem.lvl)"
-        XpRemaning.text = "\(user.lvlSystem.xpRemaningToNextLvl()) xp remaning for next lvl"
-        ProgressBar.setProgress(Float(user.lvlSystem.progress()), animated: true)
-        print("progress is \(user.lvlSystem.progress())")
-        autoKcalLable.text = "\(user.kcal.kcal) kcal has been added from health app"
+        OperationQueue.main.addOperation(){
+            print("total xp is \(self.user.lvlSystem.xp)")
+            self.Lvl.text = "\(self.user.lvlSystem.lvl)"
+            self.XpRemaning.text = "\(self.user.lvlSystem.xpRemaningToNextLvl()) xp remaning for next lvl"
+            self.ProgressBar.setProgress(Float(self.user.lvlSystem.progress()), animated: true)
+            print("progress is \(self.user.lvlSystem.progress())")
+            self.autoKcalLable.text = "\(self.user.kcal.kcal) kcal has been added from health app"
+            
+        }
+        
     }
     
     @IBAction func LogoutButton(_ sender: Any) {
