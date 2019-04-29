@@ -13,6 +13,7 @@ class User {
     static let user = User()
     var dbId = 0
     let reward = 50.0
+    var userName = ""
     
     
     let formatter = DateFormatter()

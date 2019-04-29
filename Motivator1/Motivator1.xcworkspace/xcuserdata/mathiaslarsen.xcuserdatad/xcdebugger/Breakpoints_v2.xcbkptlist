@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Motivator1/Model/Firebase.swift"
-            timestampString = "578055139.854381"
+            timestampString = "578171315.117772"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "logIn(userName:password:)"
             landmarkType = "7">
             <Locations>
@@ -26,11 +26,11 @@
                   moduleName = "Motivator1"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mathiaslarsen/Documents/Motivator1/Motivator1/Motivator1/Model/Firebase.swift"
-                  timestampString = "578055140.158942"
+                  timestampString = "578171315.410041"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
                   offsetFromSymbolStart = "252">
                </Location>
                <Location
@@ -41,14 +41,30 @@
                   moduleName = "Motivator1"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mathiaslarsen/Documents/Motivator1/Motivator1/Motivator1/Model/Firebase.swift"
-                  timestampString = "578055140.161816"
+                  timestampString = "578171315.412858"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
                   offsetFromSymbolStart = "300">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Motivator1/DataEntryViewController.swift"
+            timestampString = "578171315.118138"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "submitButton(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

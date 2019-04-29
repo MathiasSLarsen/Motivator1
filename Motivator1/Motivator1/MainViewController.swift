@@ -15,6 +15,7 @@ class FirstViewController: UIViewController {
 
     var user = User.user
     var healthKit = HealthKit.healthKit
+    var rest = REST.rest
     var firebase = Firebase.firebase
     let formatter = DateFormatter()
     var ref = Database.database().reference()
@@ -35,13 +36,18 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.formatter.dateFormat = "dd-MM-yyyy"
-        
-        user.fillArray()
-        firebase.getXp()
-        firebase.getAchivments()
-        firebase.getKcal()
-        healthKit.authHealthKit()
-        healthKit.getAutoKcal()
+        firebase.getDBUserId()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+            self.healthKit.authHealthKit()
+            self.healthKit.getAutoKcal()
+            self.rest.initUser(id: self.user.dbId)
+        })
+        //user.fillArray()
+        //firebase.getXp()
+        //firebase.getAchivments()
+        //firebase.getKcal()
+        //healthKit.authHealthKit()
+        //healthKit.getAutoKcal()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2500), execute: {
             self.user.lvlSystem.setLvl()
@@ -58,9 +64,14 @@ class FirstViewController: UIViewController {
                 self.user.kcalAchiveArray[i].checkDate()
                 self.user.lvlSystem.addDalyXp(newXp: self.user.kcalAchiveArray[i].Incrumet(newkcal: self.user.kcal.kcal))
             }
-            self.firebase.saveAchivements()
-            self.firebase.saveKcal()
-            self.firebase.saveXp()
+            //self.firebase.saveAchivements()
+            //self.firebase.saveKcal()
+            //self.firebase.saveXp()
+            self.rest.updateUser()
+            
+            for achieve in self.user.kcalAchiveArray{
+                self.rest.updateKcalAchievement(achievement: achieve)
+            }
         })
  
  

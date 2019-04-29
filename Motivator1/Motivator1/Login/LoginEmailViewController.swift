@@ -12,6 +12,7 @@ import FirebaseAuth
 class LoginEmailViewController: UIViewController {
 
     let firebase = Firebase.firebase
+    let user = User.user
     @IBOutlet weak var txtEmail: UITextField!
     
     
@@ -33,6 +34,7 @@ class LoginEmailViewController: UIViewController {
                 print(_eror.localizedDescription)
             }else{
                 if let _res = result{
+                    self.user.fillArray()
                     self.performSegue(withIdentifier: "GoHome2", sender: self)
                 }
             }

@@ -19,6 +19,7 @@ class NormAchivement: Achivements {
     let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
     let formatter = DateFormatter()
     let name: String
+    var dbId = 0
     
     init(name: String){
         self.name = name

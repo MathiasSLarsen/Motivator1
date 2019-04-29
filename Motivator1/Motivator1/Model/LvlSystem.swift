@@ -16,6 +16,7 @@ class LvlSystem{
     var date = "20-02-2019"
     var lvl = 0
     var newlvl = 0
+    var dailyId = 0
     
     // xp=250+lvl^2*100
     // lvl=sqrt((xp-250)/100)

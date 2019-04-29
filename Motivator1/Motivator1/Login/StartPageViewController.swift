@@ -11,6 +11,7 @@ import FirebaseAuth
 
 class StartPageViewController: UIViewController {
 
+    var user = User.user
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +21,7 @@ class StartPageViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if Auth.auth().currentUser != nil {
+            user.fillArray()
             self.performSegue(withIdentifier: "GoHome3", sender: nil)
         }
     }

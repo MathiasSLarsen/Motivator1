@@ -97,9 +97,9 @@ struct Firebase {
     
     func getDBUserId(){
         let uid = Auth.auth().currentUser?.uid
-        ref.child("users").child(uid!).child("DBUserId").observeSingleEvent(of: .value) { (snapshot) in
+        ref.child("users").child(uid!).child("dbUserId").observeSingleEvent(of: .value) { (snapshot) in
             let value = snapshot.value as? Int
-            self.user.dbId = value!
+            self.user.dbId = value ?? 0
         }
     }
     

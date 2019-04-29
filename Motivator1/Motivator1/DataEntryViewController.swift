@@ -27,6 +27,7 @@ class SecondViewController: UIViewController {
     var user = User.user
     var firebase = Firebase.firebase
     var healthKit = HealthKit.healthKit
+    var rest = REST.rest
     
     
     @IBOutlet weak var kcalInput: UITextField!
@@ -209,9 +210,15 @@ class SecondViewController: UIViewController {
             createAlert(title: "Lvl Up", message: "Congratulations you are now lvl \(user.lvlSystem.lvl)")
         }
         messageLable.text = "You gained \(newXp) xp"
-        firebase.saveXp()
-        firebase.saveAchivements()
-        firebase.saveKcal()
+        for achieve in user.normAchiveArray{
+            rest.updateNormAchievement(achievement: achieve)
+            
+        }
+        
+        
+        //firebase.saveXp()
+        //firebase.saveAchivements()
+        //firebase.saveKcal()
     }
     
 }

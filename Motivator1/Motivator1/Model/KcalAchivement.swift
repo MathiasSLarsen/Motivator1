@@ -17,6 +17,7 @@ class KcalAchivement {
     let toDay = Date()
     let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
     let name: String
+    var dbId = 0
     
     init(kcal: Double, name: String) {
         self.kcal = kcal
