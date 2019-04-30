@@ -18,6 +18,8 @@ class BarChartViewController: UIViewController {
     var valuesArray = [Double]()
     var dataEntries = [BarChartDataEntry]()
     var ref = Database.database().reference()
+    var user = User.user
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,10 +61,9 @@ class BarChartViewController: UIViewController {
         xAxis.labelTextColor = .white
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+        
             self.valuesArray.reverse()
             self.updateChartData()
-        })
         
         
     }
@@ -95,22 +96,7 @@ class BarChartViewController: UIViewController {
             datesArray.append(formater2.string(from: dateElement!))
             print("\(formater2.string(from: dateElement!))")
             
-            let uid = Auth.auth().currentUser?.uid
-           let dateElement2 = formater1.calendar.date(byAdding: .day, value: -i, to: now)
-            let dateString = formater1.string(from: dateElement2!)
-            ref.child("users").child(uid!).child("xp").child("dailyxp").child(dateString).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                var value = snapshot.value as? Double
-                
-                //if the value does not excist in database set it to 0.0
-                if value == nil {
-                    value = 0.0
-                }
-                self.valuesArray.append(value!)
-                // ...
-            }) { (error) in
-                print(error.localizedDescription)
-            }
+            valuesArray.append(user.oldDailyXpArray[i].dailyXp)
             
         }
         //valuesArray.reverse()

@@ -7,6 +7,10 @@
 //
 
 import Foundation
+struct OldDaliyXp {
+    let dailyXp: Double
+    let date: String
+}
 
 struct UserResp: Decodable{
     let id: Int
@@ -73,10 +77,8 @@ class REST {
             
             do{
                 let respondsData = try JSONDecoder().decode(UserResp.self, from: data)
-                print("user id is: \(respondsData.id)")
                 self.user.dbId = respondsData.id
                 self.user.userName = respondsData.userName!
-                print("userid is set to: \(self.user.dbId)")
             }catch let jsonError{
                 print("error", jsonError)
                 print("error in create user")
@@ -111,9 +113,6 @@ class REST {
             
             do{
                 let respondsData = try JSONDecoder().decode(UserResp.self, from: data)
-                print("user id is: \(respondsData.id)")
-                //self.user.dbId = respondsData.id
-                print("userid is set to: \(self.user.dbId)")
             }catch let jsonError{
                 print("error", jsonError)
                 print("error in update user")
@@ -126,7 +125,6 @@ class REST {
         let parameter = ["userId": user.dbId,
                          "dailyXp": user.lvlSystem.dalyXp,
                          "dateTime": user.lvlSystem.date] as [String : Any]
-        print("ffffffffffffffffff \(user.dbId)")
         var urlRequest = URLRequest(url: url! as URL)
         let session = URLSession.shared
         urlRequest.httpMethod = "POST"
@@ -147,9 +145,7 @@ class REST {
             
             do{
                 let respondsData = try JSONDecoder().decode(DailyXps.self, from: data)
-                print("user id is: \(respondsData.id!)")
                 self.user.lvlSystem.dailyId = respondsData.id!
-                print("dailyid is set to: \(self.user.lvlSystem.dailyId)")
             }catch let jsonError{
                 print("error", jsonError)
                 print("error in create daily")
@@ -165,7 +161,6 @@ class REST {
                          "name": achievement.name,
                          "dateTime": achievement.date,
                          "streakDays": achievement.days] as [String : Any]
-        print("ffffffffffffffffff \(user.dbId)")
         var urlRequest = URLRequest(url: url! as URL)
         let session = URLSession.shared
         urlRequest.httpMethod = "POST"
@@ -186,9 +181,7 @@ class REST {
             
             do{
                 let respondsData = try JSONDecoder().decode(DailyXps.self, from: data)
-                print("user id is: \(respondsData.id!)")
                 achievement.dbId = respondsData.id!
-                print("achive is set to: \(achievement.dbId)")
             }catch let jsonError{
                 print("error", jsonError)
                 print("error in create achice")
@@ -199,13 +192,12 @@ class REST {
     }
     
     func updateNormAchievement(achievement: NormAchivement){
-        let url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/achievements")
+        let url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/achievements/\(achievement.dbId)")
         let parameter = ["id": achievement.dbId,
                          "userId": user.dbId,
                          "name": achievement.name,
                          "dateTime": achievement.date,
                          "streakDays": achievement.days] as [String : Any]
-        print("ffffffffffffffffff \(user.dbId)")
         var urlRequest = URLRequest(url: url! as URL)
         let session = URLSession.shared
         urlRequest.httpMethod = "PUT"
@@ -226,9 +218,6 @@ class REST {
             
             do{
                 let respondsData = try JSONDecoder().decode(DailyXps.self, from: data)
-                print("user id is: \(respondsData.id!)")
-                //achievement.dbId = respondsData.id!
-                print("achive is set to: \(achievement.dbId)")
             }catch let jsonError{
                 print("error", jsonError)
                 print("error in create achice")
@@ -245,7 +234,6 @@ class REST {
                          "name": achievement.name,
                          "dateTime": achievement.date,
                          "streakDays": achievement.days] as [String : Any]
-        print("ffffffffffffffffff \(user.dbId)")
         var urlRequest = URLRequest(url: url! as URL)
         let session = URLSession.shared
         urlRequest.httpMethod = "PUT"
@@ -266,9 +254,6 @@ class REST {
             
             do{
                 let respondsData = try JSONDecoder().decode(DailyXps.self, from: data)
-                print("user id is: \(respondsData.id!)")
-                //achievement.dbId = respondsData.id!
-                print("achive is set to: \(achievement.dbId)")
             }catch let jsonError{
                 print("error", jsonError)
                 print("error in update kcal achice")
@@ -284,7 +269,6 @@ class REST {
                          "name": achievement.name,
                          "dateTime": achievement.date,
                          "streakDays": achievement.days] as [String : Any]
-        print("ffffffffffffffffff \(user.dbId)")
         var urlRequest = URLRequest(url: url! as URL)
         let session = URLSession.shared
         urlRequest.httpMethod = "POST"
@@ -305,9 +289,7 @@ class REST {
             
             do{
                 let respondsData = try JSONDecoder().decode(DailyXps.self, from: data)
-                print("user id is: \(respondsData.id!)")
                 achievement.dbId = respondsData.id!
-                print("achive is set to: \(achievement.dbId)")
             }catch let jsonError{
                 print("error", jsonError)
                 print("error in create kcal achice")
@@ -320,10 +302,10 @@ class REST {
     func initUser(id: Int){
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"
-        let url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/users/\(id)")
+        var url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/users/\(id)")
         
         var urlRequest = URLRequest(url: url! as URL)
-        let session = URLSession.shared
+        var session = URLSession.shared
         urlRequest.httpMethod = "GET"
         
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -337,14 +319,18 @@ class REST {
                 let respondsData = try JSONDecoder().decode(UserResp.self, from: data)
                 self.user.lvlSystem.xp = Double(respondsData.totalXp!)
                 
+                //set kcal
+                self.user.kcal.kcal = Double(respondsData.kcals!)
+                self.user.kcal.date = respondsData.kcalsTimeDate!
                 //set dailyxp
-                
+                /*
                 for dailyxp in respondsData.dailyXps!{
                     if (dailyxp.dateTime?.elementsEqual(formatter.string(from: Date())))!{
                         self.user.lvlSystem.dalyXp = Double(dailyxp.dailyXP!)
                     }
                 }
-                
+                */
+                /*
                 //set all normAchievement
                 for achieve in respondsData.achievements!{
                     for localAchieve in self.user.normAchiveArray{
@@ -366,15 +352,122 @@ class REST {
                         }
                     }
                 }
-                
-                //set kcal
-                
-                self.user.kcal.kcal = Double(respondsData.kcals!)
-                self.user.kcal.date = respondsData.kcalsTimeDate!
- 
+ */
             }catch let jsonError{
                 print("error", jsonError)
                 print("error in init user")
+            }
+            
+            
+            }.resume()
+        
+        //set dailyxp
+        url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/dailyxps")
+        urlRequest = URLRequest(url: url! as URL)
+        session = URLSession.shared
+        urlRequest.httpMethod = "GET"
+        
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: urlRequest) { (data, responds, error) in
+            
+            guard let data = data else {return}
+            
+            do{
+                let respondsData = try JSONDecoder().decode([DailyXps].self, from: data)
+                for dailyxp in respondsData{
+                    if (id == dailyxp.userId! && (dailyxp.dateTime?.elementsEqual(formatter.string(from: Date())))!){
+                        self.user.lvlSystem.dalyXp = Double(dailyxp.dailyXP!)
+                    }
+                }
+            }catch let jsonError{
+                print("error", jsonError)
+                print("error in get daily")
+            }
+            
+            
+            }.resume()
+        
+        //set avhievements
+        url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/achievements")
+        
+        urlRequest = URLRequest(url: url! as URL)
+        session = URLSession.shared
+        urlRequest.httpMethod = "GET"
+        
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: urlRequest) { (data, responds, error) in
+            
+            guard let data = data else {return}
+            
+            do{
+                let respondsData = try JSONDecoder().decode([Achievements].self, from: data)
+                
+                for achieve in respondsData{
+                    for localAchieve in self.user.normAchiveArray{
+                        if achieve.name == localAchieve.name && id == achieve.userId{
+                            localAchieve.days = achieve.streakDays!
+                            localAchieve.dbId = achieve.id!
+                            localAchieve.date = achieve.dateTime!
+                            print("\(achieve.name) is set")
+                        }
+                    }
+                }
+                
+                //set all kcalAchievement
+                for achieve in respondsData{
+                    for localAchieve in self.user.kcalAchiveArray{
+                        if achieve.name == localAchieve.name && id == achieve.userId{
+                            localAchieve.days = achieve.streakDays!
+                            localAchieve.dbId = achieve.id!
+                            localAchieve.date = achieve.dateTime!
+                            print("\(achieve.name) is set")
+                        }
+                    }
+                }
+            }catch let jsonError{
+                print("error", jsonError)
+                print("error in get achievements")
+            }
+            
+            
+            }.resume()
+        
+    }
+    
+    func lastSevenDailyxp(){
+        let url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/users/\(user.dbId)/lastSevenDailyxps")
+        var urlRequest = URLRequest(url: url! as URL)
+        let session = URLSession.shared
+        urlRequest.httpMethod = "GET"
+        /*
+        do{
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameter, options: .prettyPrinted)
+        }
+        catch let error{
+            print(error.localizedDescription)
+        }
+        */
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: urlRequest) { (data, responds, error) in
+            
+            guard let data = data else {return}
+            
+            do{
+                let respondsData = try JSONDecoder().decode([DailyXps].self, from: data)
+                for daily in respondsData{
+                    print("oldDaily xp is \(daily.dailyXP!)")
+                    let oldDailyXp = User.OldDailyXp.init(dailyXp: Double(daily.dailyXP!), date: daily.dateTime!)
+                    self.user.oldDailyXpArray.append(oldDailyXp)
+                }
+            }catch let jsonError{
+                print("error", jsonError)
+                print("error in create daily")
             }
             
             

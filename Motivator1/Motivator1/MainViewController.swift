@@ -37,10 +37,11 @@ class FirstViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.formatter.dateFormat = "dd-MM-yyyy"
         firebase.getDBUserId()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
             self.healthKit.authHealthKit()
             self.healthKit.getAutoKcal()
             self.rest.initUser(id: self.user.dbId)
+            self.rest.lastSevenDailyxp()
         })
         //user.fillArray()
         //firebase.getXp()
@@ -49,7 +50,7 @@ class FirstViewController: UIViewController {
         //healthKit.authHealthKit()
         //healthKit.getAutoKcal()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2500), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
             self.user.lvlSystem.setLvl()
             self.user.lvlSystem.addDalyXp(newXp: self.user.kcal.kcalDiff(newDate: self.formatter.string(from: Date())))
             
@@ -58,9 +59,11 @@ class FirstViewController: UIViewController {
             }
             self.setFields()
             for i in 0..<self.user.normAchiveArray.count{
+                print("\(self.user.normAchiveArray[i].name) is used")
                 self.user.normAchiveArray[i].checkDate()
             }
             for i in 0..<self.user.kcalAchiveArray.count{
+                print("\(self.user.kcalAchiveArray[i].name) is used")
                 self.user.kcalAchiveArray[i].checkDate()
                 self.user.lvlSystem.addDalyXp(newXp: self.user.kcalAchiveArray[i].Incrumet(newkcal: self.user.kcal.kcal))
             }

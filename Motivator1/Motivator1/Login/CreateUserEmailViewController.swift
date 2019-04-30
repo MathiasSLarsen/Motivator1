@@ -50,6 +50,7 @@ class CreateUserViewController: UIViewController {
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                    self.firebase.saveDBUserId()
                     self.rest.createDailyxp()
                     for achieve in self.user.normAchiveArray{
                         self.rest.createNormAchievement(achievement: achieve)
@@ -57,10 +58,10 @@ class CreateUserViewController: UIViewController {
                     for achieve in self.user.kcalAchiveArray{
                         self.rest.createKcalAchievement(achievement: achieve)
                     }
-                    self.firebase.saveAchivements()
-                    self.firebase.saveKcal()
-                    self.firebase.saveXp()
-                    self.firebase.saveDBUserId()
+                    //self.firebase.saveAchivements()
+                    //self.firebase.saveKcal()
+                    //self.firebase.saveXp()
+                    
                     self.performSegue(withIdentifier: "GoHome", sender: self)
                 })
             }

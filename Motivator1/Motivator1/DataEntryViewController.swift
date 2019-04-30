@@ -210,12 +210,17 @@ class SecondViewController: UIViewController {
             createAlert(title: "Lvl Up", message: "Congratulations you are now lvl \(user.lvlSystem.lvl)")
         }
         messageLable.text = "You gained \(newXp) xp"
+        
+        
+        //save achievements
         for achieve in user.normAchiveArray{
             rest.updateNormAchievement(achievement: achieve)
-            
+        }
+        for achieve in user.kcalAchiveArray{
+            rest.updateKcalAchievement(achievement: achieve)
         }
         
-        
+        rest.updateUser()
         //firebase.saveXp()
         //firebase.saveAchivements()
         //firebase.saveKcal()
