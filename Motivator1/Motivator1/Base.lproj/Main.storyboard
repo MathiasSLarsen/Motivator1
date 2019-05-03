@@ -97,10 +97,10 @@
                                         </items>
                                     </navigationBar>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="143" translatesAutoresizingMaskIntoConstraints="NO" id="Swn-cg-bqv">
-                                        <rect key="frame" x="0.0" y="144" width="375" height="132.5"/>
+                                        <rect key="frame" x="0.0" y="144" width="375" height="183.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="PL1-af-Fmn">
-                                                <rect key="frame" x="20" y="0.0" width="335" height="132.5"/>
+                                                <rect key="frame" x="20" y="0.0" width="335" height="183.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are lvl" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OY1-gW-7Zg">
                                                         <rect key="frame" x="128.5" y="0.0" width="78.5" height="21"/>
@@ -144,6 +144,17 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SiD-Tg-W5g">
+                                                        <rect key="frame" x="147.5" y="143.5" width="40" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="40" id="10U-i2-iod"/>
+                                                            <constraint firstAttribute="height" constant="40" id="Nqa-GZ-3Rq"/>
+                                                        </constraints>
+                                                        <state key="normal" image="graph icon"/>
+                                                        <connections>
+                                                            <action selector="BarButton:" destination="9pv-A4-QxB" eventType="touchUpInside" id="qPa-Py-hHL"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -153,17 +164,6 @@
                                             <constraint firstItem="PL1-af-Fmn" firstAttribute="top" secondItem="Swn-cg-bqv" secondAttribute="top" id="lHM-8j-Gqh"/>
                                         </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SiD-Tg-W5g">
-                                        <rect key="frame" x="167.5" y="316.5" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="10U-i2-iod"/>
-                                            <constraint firstAttribute="height" constant="40" id="Nqa-GZ-3Rq"/>
-                                        </constraints>
-                                        <state key="normal" image="graph icon"/>
-                                        <connections>
-                                            <action selector="BarButton:" destination="9pv-A4-QxB" eventType="touchUpInside" id="qPa-Py-hHL"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -171,12 +171,10 @@
                                     <constraint firstAttribute="trailing" secondItem="n4h-Z2-zmn" secondAttribute="trailing" id="554-mT-Hpr"/>
                                     <constraint firstItem="Swn-cg-bqv" firstAttribute="leading" secondItem="a22-3F-CHL" secondAttribute="leading" id="5dc-ze-KIA"/>
                                     <constraint firstItem="Swn-cg-bqv" firstAttribute="top" secondItem="n4h-Z2-zmn" secondAttribute="bottom" constant="100" id="BNP-Ij-Z3A"/>
-                                    <constraint firstItem="SiD-Tg-W5g" firstAttribute="centerX" secondItem="a22-3F-CHL" secondAttribute="centerX" id="F5m-T9-71d"/>
                                     <constraint firstItem="n4h-Z2-zmn" firstAttribute="leading" secondItem="a22-3F-CHL" secondAttribute="leading" id="IoB-Pd-WHA"/>
                                     <constraint firstItem="n4h-Z2-zmn" firstAttribute="top" secondItem="a22-3F-CHL" secondAttribute="top" id="SCy-Pz-BEo"/>
                                     <constraint firstItem="n4h-Z2-zmn" firstAttribute="leading" secondItem="Swn-cg-bqv" secondAttribute="leading" id="a0n-qi-Ggb"/>
                                     <constraint firstAttribute="trailing" secondItem="Swn-cg-bqv" secondAttribute="trailing" id="gaz-te-Xag"/>
-                                    <constraint firstItem="SiD-Tg-W5g" firstAttribute="top" secondItem="Swn-cg-bqv" secondAttribute="bottom" constant="40" id="mKB-Rj-5hz"/>
                                     <constraint firstItem="n4h-Z2-zmn" firstAttribute="trailing" secondItem="Swn-cg-bqv" secondAttribute="trailing" id="qA7-9c-ZQH"/>
                                 </constraints>
                             </view>
@@ -507,7 +505,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n">
+                        <inset key="landscapeImageInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="candyBox" destination="u9h-OP-tpm" id="UUp-WY-cvn"/>
                         <outlet property="cigiBox" destination="oOe-UB-wpL" id="zYX-Qn-uBe"/>
@@ -875,6 +875,7 @@
         <image name="unchecked-checkbox" width="788" height="788"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="KYU-4R-z6L"/>
         <segue reference="Pse-tG-MPF"/>
         <segue reference="yxZ-6p-zL6"/>
     </inferredMetricsTieBreakers>
