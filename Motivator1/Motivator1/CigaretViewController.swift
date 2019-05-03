@@ -11,6 +11,7 @@ class CigaretViewController: UIViewController {
     
     var firebase = Firebase.firebase
     var user = User.user
+    var rest = REST.rest
     let formatter = DateFormatter()
     var barDataEntries = [BarChartDataEntry]()
     var lineDataEntries = [ChartDataEntry]()
@@ -62,9 +63,9 @@ class CigaretViewController: UIViewController {
         xAxis.axisLineColor = .white
         xAxis.labelTextColor = .white
         //xAxis.valueFormatter = self
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            self.updateChartData()
-        })
+        
+        self.updateChartData()
+    
         
     }
     
@@ -147,6 +148,7 @@ class CigaretViewController: UIViewController {
     }
     
     func generateBarData() -> BarChartData {
+        print("amount of cigirets = \(user.cigiArray.count)")
         for i in 0..<user.cigiArray.count{
             let houre = Int(user.cigiArray[i].houre)
             valuesArray[houre!]+=1
@@ -182,6 +184,7 @@ class CigaretViewController: UIViewController {
     }
     
     @IBAction func addCigaret(_ sender: Any) {
+        
         formatter.dateFormat = "dd-MM-yyyy"
         let date = formatter.string(from: Date())
         print(date)
@@ -190,7 +193,8 @@ class CigaretViewController: UIViewController {
         print(houre)
         let cigi = Cigaret(date: date, houre: houre)
         user.cigiArray.append(cigi)
-        firebase.saveCigaret(cigaret: cigi)
+        //firebase.saveCigaret(cigaret: cigi)
+        rest.createCigaret()
         
         updateChartData()
     }

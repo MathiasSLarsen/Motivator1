@@ -11,6 +11,9 @@ import FirebaseDatabase
 import FirebaseAuth
 import HealthKit
 
+let userSetNotification = "userSetNotification"
+let userSetNotification2 = "userSetNotification2"
+
 class FirstViewController: UIViewController {
 
     var user = User.user
@@ -36,13 +39,16 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.formatter.dateFormat = "dd-MM-yyyy"
+        NotificationCenter.default.addObserver(self, selector: #selector(loadData), name: NSNotification.Name(userSetNotification), object: nil)
         firebase.getDBUserId()
+        /*
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
             self.healthKit.authHealthKit()
             self.healthKit.getAutoKcal()
             self.rest.initUser(id: self.user.dbId)
             self.rest.lastSevenDailyxp()
         })
+ */
         //user.fillArray()
         //firebase.getXp()
         //firebase.getAchivments()
@@ -50,6 +56,8 @@ class FirstViewController: UIViewController {
         //healthKit.authHealthKit()
         //healthKit.getAutoKcal()
         
+        
+        /*
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
             self.user.lvlSystem.setLvl()
             self.user.lvlSystem.addDalyXp(newXp: self.user.kcal.kcalDiff(newDate: self.formatter.string(from: Date())))
@@ -76,7 +84,7 @@ class FirstViewController: UIViewController {
                 self.rest.updateKcalAchievement(achievement: achieve)
             }
         })
- 
+ */
  
     }
     
@@ -85,8 +93,42 @@ class FirstViewController: UIViewController {
         setFields()
     }
     
-    func loadData(){
+    @objc func loadData(){
+        self.healthKit.authHealthKit()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(setData), name: NSNotification.Name(userSetNotification2), object: nil)
+        
+        self.rest.initUser(id: self.user.dbId)
+        self.rest.lastSevenDailyxp()
+        self.healthKit.getAutoKcal()
+        
+    }
+    
+    @objc func setData(){
+        self.user.lvlSystem.setLvl()
+        self.user.lvlSystem.addDalyXp(newXp: self.user.kcal.kcalDiff(newDate: self.formatter.string(from: Date())))
+        
+        if self.user.lvlSystem.didLvlChange(){
+            self.createLvlAlert()
+        }
+        self.setFields()
+        for i in 0..<self.user.normAchiveArray.count{
+            print("\(self.user.normAchiveArray[i].name) is used")
+            self.user.normAchiveArray[i].checkDate()
+        }
+        for i in 0..<self.user.kcalAchiveArray.count{
+            print("\(self.user.kcalAchiveArray[i].name) is used")
+            self.user.kcalAchiveArray[i].checkDate()
+            self.user.lvlSystem.addDalyXp(newXp: self.user.kcalAchiveArray[i].Incrumet(newkcal: self.user.kcal.kcal))
+        }
+        //self.firebase.saveAchivements()
+        //self.firebase.saveKcal()
+        //self.firebase.saveXp()
+        self.rest.updateUser()
+        
+        for achieve in self.user.kcalAchiveArray{
+            self.rest.updateKcalAchievement(achievement: achieve)
+        }
     }
     
     func createLvlAlert(){
@@ -103,12 +145,14 @@ class FirstViewController: UIViewController {
     }
     
     func setFields(){
-        print("total xp is \(user.lvlSystem.xp)")
-        Lvl.text = "\(user.lvlSystem.lvl)"
-        XpRemaning.text = "\(user.lvlSystem.xpRemaningToNextLvl()) xp remaning for next lvl"
-        ProgressBar.setProgress(Float(user.lvlSystem.progress()), animated: true)
-        print("progress is \(user.lvlSystem.progress())")
-        autoKcalLable.text = "\(user.kcal.kcal) kcal has been added from health app"
+        OperationQueue.main.addOperation {
+            print("total xp is \(self.user.lvlSystem.xp)")
+            self.Lvl.text = "\(self.user.lvlSystem.lvl)"
+            self.XpRemaning.text = "\(self.user.lvlSystem.xpRemaningToNextLvl()) xp remaning for next lvl"
+            self.ProgressBar.setProgress(Float(self.user.lvlSystem.progress()), animated: true)
+            print("progress is \(self.user.lvlSystem.progress())")
+            self.autoKcalLable.text = "\(self.user.kcal.kcal) kcal has been added from health app"
+        }
     }
     
     @IBAction func LogoutButton(_ sender: Any) {

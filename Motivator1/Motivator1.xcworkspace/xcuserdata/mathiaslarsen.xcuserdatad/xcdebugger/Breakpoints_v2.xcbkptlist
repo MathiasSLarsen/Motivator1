@@ -9,61 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Motivator1/Model/Firebase.swift"
-            timestampString = "578171315.117772"
+            filePath = "Motivator1/Model/REST.swift"
+            timestampString = "578509031.980058"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "logIn(userName:password:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Motivator1.Firebase.logIn(userName: Swift.String, password: Swift.String) -&gt; Swift.Bool"
-                  moduleName = "Motivator1"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mathiaslarsen/Documents/Motivator1/Motivator1/Motivator1/Model/Firebase.swift"
-                  timestampString = "578171315.410041"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "252">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Motivator1.Firebase.logIn(userName: Swift.String, password: Swift.String) -&gt; Swift.Bool"
-                  moduleName = "Motivator1"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mathiaslarsen/Documents/Motivator1/Motivator1/Motivator1/Model/Firebase.swift"
-                  timestampString = "578171315.412858"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "300">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Motivator1/DataEntryViewController.swift"
-            timestampString = "578171315.118138"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "submitButton(_:)"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
+            landmarkName = "initUser(id:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

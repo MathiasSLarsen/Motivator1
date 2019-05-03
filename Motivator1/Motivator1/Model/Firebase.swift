@@ -100,6 +100,7 @@ struct Firebase {
         ref.child("users").child(uid!).child("dbUserId").observeSingleEvent(of: .value) { (snapshot) in
             let value = snapshot.value as? Int
             self.user.dbId = value ?? 0
+            NotificationCenter.default.post(name: NSNotification.Name(userSetNotification), object: self)
         }
     }
     

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+
 struct OldDaliyXp {
     let dailyXp: Double
     let date: String
@@ -19,7 +21,7 @@ struct UserResp: Decodable{
     let kcals: Int?
     let kcalsTimeDate: String?
     let dailyXps: [DailyXps]?
-    let cigaret: [CigaretResp]?
+    let cigaret: [Cigarets]?
     let achievements: [Achievements]?
 }
 
@@ -30,10 +32,11 @@ struct DailyXps: Decodable{
     let dateTime: String?
 }
 
-struct CigaretResp: Decodable {
+struct Cigarets: Decodable {
     let id: Int?
-    let dateTime: Date?
     let userId: Int?
+    let cigaretsSmoked: Int?
+    let dateTime: String?
     let hour: Int?
 }
 
@@ -50,6 +53,7 @@ class REST {
     static let rest = REST()
     var user = User.user
     var firebase = Firebase.firebase
+    let formatter = DateFormatter()
     
     func createUser(username: String){
         let url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/users")
@@ -389,6 +393,39 @@ class REST {
             
             }.resume()
         
+        //set cigarets
+        url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/users/\(user.dbId)/cigarets")
+        urlRequest = URLRequest(url: url! as URL)
+        session = URLSession.shared
+        urlRequest.httpMethod = "GET"
+        
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: urlRequest) { (data, responds, error) in
+            
+            guard let data = data else {return}
+            
+            do{
+                let respondsData = try JSONDecoder().decode([Cigarets].self, from: data)
+                formatter.dateFormat = "dd-MM-yyyy"
+                
+                let today = Date()
+                for cigi in respondsData{
+                    let cigiDate = formatter.date(from:cigi.dateTime!)
+                    if cigiDate == today {
+                        let newCigi = Cigaret(date: cigi.dateTime!, houre: String(cigi.hour!))
+                        self.user.cigiArray.append(newCigi)
+                    }
+                }
+            }catch let jsonError{
+                print("error", jsonError)
+                print("error in get cigi")
+            }
+            
+            
+            }.resume()
+        
         //set avhievements
         url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/achievements")
         
@@ -434,6 +471,8 @@ class REST {
             }
             
             
+            
+            NotificationCenter.default.post(name: NSNotification.Name(userSetNotification2), object: self)
             }.resume()
         
     }
@@ -471,6 +510,43 @@ class REST {
             }
             
             
-            }.resume()
+        }.resume()
+    }
+    
+    func createCigaret(){
+        
+        formatter.dateFormat = "H"
+        let houre = formatter.string(from: Date())
+        
+        let url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/cigarets")
+        let parameter = ["userId": user.dbId,
+                         "cigaretsSmoked": 1,
+                         "hour": houre] as [String : Any]
+        var urlRequest = URLRequest(url: url! as URL)
+        let session = URLSession.shared
+        urlRequest.httpMethod = "POST"
+        
+        do{
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameter, options: .prettyPrinted)
+        }
+        catch let error{
+            print(error.localizedDescription)
+        }
+        
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: urlRequest) { (data, responds, error) in
+            
+            guard let data = data else {return}
+            
+            do{
+                let respondsData = try JSONDecoder().decode(UserResp.self, from: data)
+            }catch let jsonError{
+                print("error", jsonError)
+                print("error in create cigaret")
+            }
+
+        }.resume()
     }
 }
