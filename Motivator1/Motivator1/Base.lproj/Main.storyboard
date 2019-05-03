@@ -168,9 +168,12 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="n4h-Z2-zmn" firstAttribute="top" secondItem="a22-3F-CHL" secondAttribute="top" id="2wi-oN-psg"/>
+                                    <constraint firstAttribute="trailing" secondItem="n4h-Z2-zmn" secondAttribute="trailing" id="554-mT-Hpr"/>
                                     <constraint firstItem="Swn-cg-bqv" firstAttribute="leading" secondItem="a22-3F-CHL" secondAttribute="leading" id="5dc-ze-KIA"/>
                                     <constraint firstItem="Swn-cg-bqv" firstAttribute="top" secondItem="n4h-Z2-zmn" secondAttribute="bottom" constant="100" id="BNP-Ij-Z3A"/>
                                     <constraint firstItem="SiD-Tg-W5g" firstAttribute="centerX" secondItem="a22-3F-CHL" secondAttribute="centerX" id="F5m-T9-71d"/>
+                                    <constraint firstItem="n4h-Z2-zmn" firstAttribute="leading" secondItem="a22-3F-CHL" secondAttribute="leading" id="IoB-Pd-WHA"/>
+                                    <constraint firstItem="n4h-Z2-zmn" firstAttribute="top" secondItem="a22-3F-CHL" secondAttribute="top" id="SCy-Pz-BEo"/>
                                     <constraint firstItem="n4h-Z2-zmn" firstAttribute="leading" secondItem="Swn-cg-bqv" secondAttribute="leading" id="a0n-qi-Ggb"/>
                                     <constraint firstAttribute="trailing" secondItem="Swn-cg-bqv" secondAttribute="trailing" id="gaz-te-Xag"/>
                                     <constraint firstItem="SiD-Tg-W5g" firstAttribute="top" secondItem="Swn-cg-bqv" secondAttribute="bottom" constant="40" id="mKB-Rj-5hz"/>
@@ -180,12 +183,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="7jM-2d-jpL" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="9JX-kU-9bq"/>
+                            <constraint firstItem="7jM-2d-jpL" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="9JX-kU-9bq"/>
                             <constraint firstItem="a22-3F-CHL" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="BRb-vr-LgY"/>
                             <constraint firstItem="a22-3F-CHL" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="Ryc-Y2-Ybq"/>
                             <constraint firstItem="a22-3F-CHL" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="odu-8f-oS3"/>
-                            <constraint firstItem="7jM-2d-jpL" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="20" id="yF4-Ie-IS1"/>
-                            <constraint firstAttribute="trailing" secondItem="7jM-2d-jpL" secondAttribute="trailing" id="yIy-Bh-2E5"/>
+                            <constraint firstItem="7jM-2d-jpL" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="yF4-Ie-IS1"/>
+                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="7jM-2d-jpL" secondAttribute="trailing" id="yIy-Bh-2E5"/>
                             <constraint firstAttribute="trailing" secondItem="a22-3F-CHL" secondAttribute="trailing" id="zfx-e8-t4b"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
@@ -228,7 +231,7 @@
                                             <navigationItem title="Title" id="tSK-kE-rA6">
                                                 <barButtonItem key="leftBarButtonItem" title="Back" id="eyW-em-aZo">
                                                     <connections>
-                                                        <segue destination="9pv-A4-QxB" kind="show" id="4y9-7t-x51"/>
+                                                        <action selector="BackButton:" destination="WYC-bR-DJ3" id="FAc-jG-XXc"/>
                                                     </connections>
                                                 </barButtonItem>
                                             </navigationItem>
@@ -262,11 +265,12 @@
                     </view>
                     <connections>
                         <outlet property="BarChart" destination="VbE-ep-xFR" id="eki-RL-K2W"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="GoHome4" id="Pse-tG-MPF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVo-7m-fqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1550" y="-675"/>
+            <point key="canvasLocation" x="1633" y="-675"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
@@ -871,9 +875,7 @@
         <image name="unchecked-checkbox" width="788" height="788"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KYU-4R-z6L"/>
-        <segue reference="pZ1-Jq-RuJ"/>
+        <segue reference="Pse-tG-MPF"/>
         <segue reference="yxZ-6p-zL6"/>
-        <segue reference="4y9-7t-x51"/>
     </inferredMetricsTieBreakers>
 </document>

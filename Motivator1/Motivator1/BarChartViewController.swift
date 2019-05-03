@@ -12,19 +12,25 @@ import Firebase
 
 class BarChartViewController: UIViewController {
 
+    
+    @IBAction func BackButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "GoHome4", sender: self)
+    }
+    
     @IBOutlet weak var BarChart: BarChartView!
     
-    var datesArray = [String]()
-    var valuesArray = [Double]()
+    //var datesArray = [String]()
+    //var valuesArray = [Double]()
     var dataEntries = [BarChartDataEntry]()
     var ref = Database.database().reference()
+    let user = User.user
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         //BarChart.delegate = self
-        setChartData()
+        //setChartData()
         BarChart.chartDescription?.enabled = false
         
         BarChart.drawBarShadowEnabled = false
@@ -58,18 +64,15 @@ class BarChartViewController: UIViewController {
         xAxis.valueFormatter = self
         xAxis.labelTextColor = .white
         
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            self.valuesArray.reverse()
+            //user.olddailyXpArray.reverse()
             self.updateChartData()
-        })
         
         
     }
     func updateChartData(){
-        print("\(valuesArray.count)")
+        print("\(user.olddailyXpArray.count)")
         for i in 0...6{
-            let entry = BarChartDataEntry(x: Double(i), y: valuesArray[i])
+            let entry = BarChartDataEntry(x: Double(i), y: user.olddailyXpArray[i])
             dataEntries.append(entry)
         }
         
@@ -83,7 +86,9 @@ class BarChartViewController: UIViewController {
     }
     
     func setChartData(){
+        
         //let calender = Calendar.current
+        /*
         let now = Date()
         let formater1 = DateFormatter()
         formater1.dateFormat = "dd-MM-yyyy"
@@ -115,7 +120,7 @@ class BarChartViewController: UIViewController {
         }
         //valuesArray.reverse()
         datesArray.reverse()
-        
+        */
     }
 
     /*
@@ -131,6 +136,6 @@ class BarChartViewController: UIViewController {
 }
 extension BarChartViewController: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return datesArray[Int(value) % datesArray.count]
+        return user.datesArray[Int(value) % user.datesArray.count]
     }
 }

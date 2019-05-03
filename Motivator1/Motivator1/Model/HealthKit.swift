@@ -69,7 +69,7 @@ struct HealthKit {
                     self.user.kcal.newKcal = kcal
                 });
             }
-            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: userSetNotification2), object: self)
             
         }
         healthKitStore.execute(query)

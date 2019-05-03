@@ -8,8 +8,11 @@
 
 import Foundation
 
+
+
 class User {
     
+
     static let user = User()
     var dbId = 0
     let reward = 50.0
@@ -17,6 +20,8 @@ class User {
     
     let formatter = DateFormatter()
     
+    var datesArray = [String]()
+    var olddailyXpArray = [0.0,0.0,0.0,0.0,0.0,0.0,0.0]
     var cigiArray = [Cigaret]()
     var normAchiveArray = [NormAchivement]()
     var kcalAchiveArray = [KcalAchivement]()

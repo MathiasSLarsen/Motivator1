@@ -199,10 +199,12 @@ class SecondViewController: UIViewController {
         }
         if (formatter.string(from: Date()).elementsEqual(user.lvlSystem.date) ){
             user.lvlSystem.addDalyXp(newXp: newXp)
+            user.olddailyXpArray[6] = user.lvlSystem.dalyXp
         }else{
             user.lvlSystem.dalyXp = 0
             user.lvlSystem.addDalyXp(newXp: newXp)
             user.lvlSystem.date = formatter.string(from: Date())
+            user.olddailyXpArray[6] = user.lvlSystem.dalyXp
         }
         
         if user.lvlSystem.didLvlChange(){

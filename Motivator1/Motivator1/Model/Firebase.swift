@@ -17,47 +17,165 @@ struct Firebase {
     let formatter = DateFormatter()
     var user = User.user
     let uid = Auth.auth().currentUser?.uid
-    let semaphore = DispatchSemaphore(value: 0)
     
-    /*
-    func test(userName: String, password: String, completion: @escaping (AuthDataResult?, Error?)->()) -> Bool{
-        var logedIn = false
-        Auth.auth().signIn(withEmail: userName, password: password) { (result, error) in
-            if let _eror = error{
-                completion(nil, _eror)
-                print(_eror.localizedDescription)
-            }else{
-                if let _res = result{
-                    logedIn = true
-                    completion(_res, nil)
-                    print("loged in is: \(logedIn)")
-                }
-            }
-        }
-        return logedIn
-    }
- */
     
-    func logIn(userName: String, password: String)-> Bool {
+    
+    
+    func initUser(){
         
-        var logedIn = false
-        Auth.auth().signIn(withEmail: userName, password: password) { (result, error) in
-            print("test")
-            if let _eror = error{
-                print(_eror.localizedDescription)
-                self.semaphore.signal()
-            }else{
-                if let _res = result{
-                    logedIn = true
-                    print("loged in is: \(logedIn)")
-                    self.semaphore.signal()
+        let now = Date()
+        let formater1 = DateFormatter()
+        formater1.dateFormat = "dd-MM-yyyy"
+        let formater2 = DateFormatter()
+        formater2.dateFormat = "dd/MM"
+        
+        for i in (0...6).reversed(){
+            let dateElement = formater2.calendar.date(byAdding: .day, value: -i, to: now)
+            user.datesArray.append(formater2.string(from: dateElement!))
+            print("\(formater2.string(from: dateElement!))")
+            
+            let uid = Auth.auth().currentUser?.uid
+            let dateElement2 = formater1.calendar.date(byAdding: .day, value: -i, to: now)
+            let dateString = formater1.string(from: dateElement2!)
+            ref.child("users").child(uid!).child("xp").child("dailyxp").child(dateString).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                var value = snapshot.value as? Double
+                
+                //if the value does not excist in database set it to 0.0
+                if value == nil {
+                    value = 0.0
                 }
+                
+                self.user.olddailyXpArray[i] = value!
+                
+                // ...
+            }) { (error) in
+                print(error.localizedDescription)
             }
-            //self.semaphore.signal()
+            
         }
-        _ = semaphore.wait(timeout: .distantFuture)
-        return logedIn
+        
+        //getting achievements
+        let uid = Auth.auth().currentUser?.uid
+        for i in 0..<user.normAchiveArray.count{
+            ref.child("users").child(uid!).child("achivements").child(user.normAchiveArray[i].name).child("days").observeSingleEvent(of: .value, with: {(snapshot) in
+                var value = snapshot.value as? Int
+                
+                if value == nil{
+                    self.saveAchivements()
+                    value = 0
+                }
+                self.user.normAchiveArray[i].days = value!
+            })
+            ref.child("users").child(uid!).child("achivements").child(user.normAchiveArray[i].name).child("date").observeSingleEvent(of: .value, with: {(snapshot) in
+                var value = snapshot.value as? String
+                
+                if value == nil{
+                    self.saveAchivements()
+                    value = "01-01-2019"
+                }
+                self.user.normAchiveArray[i].date = value!
+            })
+        }
+        
+        
+        for i in 0..<user.kcalAchiveArray.count{
+            ref.child("users").child(uid!).child("achivements").child(user.kcalAchiveArray[i].name).child("days").observeSingleEvent(of: .value, with: {(snapshot) in
+                var value = snapshot.value as? Int
+                
+                if value == nil{
+                    self.saveAchivements()
+                    value = 0
+                }
+                self.user.kcalAchiveArray[i].days = value!
+            })
+            ref.child("users").child(uid!).child("achivements").child(user.kcalAchiveArray[i].name).child("date").observeSingleEvent(of: .value, with: {(snapshot) in
+                var value = snapshot.value as? String
+                
+                if value == nil{
+                    self.saveAchivements()
+                    value = "01-01-2019"
+                }
+                self.user.kcalAchiveArray[i].date = value!
+                
+            })
+        }
+        print("done getting achievement")
+        
+        
+        //getting xp
+        formatter.dateFormat = "dd-MM-yyyy"
+        ref.child("users").child(uid!).child("xp").child("totalXp").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            var value = snapshot.value as? Double
+            
+            //if the value does not excist in database create it and set to 0.0
+            if value == nil {
+                self.saveXp()
+                value = 0.0
+            }
+            self.user.lvlSystem.xp = value!
+            print("xp from db is \(value!)")
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        ref.child("users").child(uid!).child("xp").child("dailyxp").child(formatter.string(from: Date())).observeSingleEvent(of: .value) { (snapshot) in
+            var value = snapshot.value as? Double
+            if value == nil{
+                self.saveXp()
+                value = 0.0
+            }
+            self.user.lvlSystem.dalyXp = value!
+        }
+        
+        //getting cigaretts
+        formatter.dateFormat = "dd-MM-yyyy"
+        ref.child("users").child(uid!).child("cigaret").child(formatter.string(from: Date())).observeSingleEvent(of: .value, with: { (snapshot) in
+            for child in snapshot.children{
+                let snap = child as! DataSnapshot
+                let houre = snap.value as! String
+                let cigaret = Cigaret(date: self.formatter.string(from: Date()), houre: houre)
+                self.user.cigiArray.append(cigaret)
+                print("cigeret hour is \(cigaret.houre)")
+                
+            }
+        })
+        
+        //getting kcal
+        ref.child("users").child(uid!).child("kcal").child("value").observeSingleEvent(of: .value, with: { (snapshot) in
+            var value = snapshot.value as? Double
+            
+            if value == nil {
+                self.saveKcal()
+                value = 0.0
+            }
+            self.user.kcal.kcal = value!
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        ref.child("users").child(uid!).child("kcal").child("date").observeSingleEvent(of: .value, with: { (snapshot) in
+            var value = snapshot.value as? String
+            if value == nil{
+                self.saveKcal()
+                value = "01-01-2019"
+            }
+            self.user.kcal.date = value!
+            print("kcal from db is \(value!)")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: userSetNotification), object: self)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        //user.datesArray.reverse()
+        //getAchivments()
+        //getXp()
+        //getCigarets()
+        //getKcal()
     }
+
+    
     
     func saveCigaret(cigaret: Cigaret){
         let uid = Auth.auth().currentUser?.uid
@@ -112,6 +230,7 @@ struct Firebase {
                 let houre = snap.value as! String
                 let cigaret = Cigaret(date: self.formatter.string(from: Date()), houre: houre)
                 self.user.cigiArray.append(cigaret)
+                print("cigeret hour is \(cigaret.houre)")
                 
             }
         })
@@ -139,6 +258,7 @@ struct Firebase {
             })
         }
         
+        let controle = user.kcalAchiveArray.count-1
         for i in 0..<user.kcalAchiveArray.count{
             ref.child("users").child(uid!).child("achivements").child(user.kcalAchiveArray[i].name).child("days").observeSingleEvent(of: .value, with: {(snapshot) in
                 var value = snapshot.value as? Int
@@ -157,10 +277,14 @@ struct Firebase {
                     value = "01-01-2019"
                 }
                 self.user.kcalAchiveArray[i].date = value!
+                
+                if i == controle {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: userSetNotification), object: self)
+                }
             })
         }
         print("done getting achievement")
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: userSetNotification3), object: self)
+        
     }
     
     
@@ -177,7 +301,7 @@ struct Firebase {
                 value = 0.0
             }
             self.user.lvlSystem.xp = value!
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: userSetNotification), object: self)
+            print("xp from db is \(value!)")
 
         }) { (error) in
             print(error.localizedDescription)
@@ -215,7 +339,7 @@ struct Firebase {
                 value = "01-01-2019"
             }
             self.user.kcal.date = value!
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: userSetNotification2), object: self)
+            print("kcal from db is \(value!)")
         }) { (error) in
             print(error.localizedDescription)
         }

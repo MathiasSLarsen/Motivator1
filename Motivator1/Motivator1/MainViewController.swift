@@ -21,8 +21,6 @@ class FirstViewController: UIViewController {
     var healthKit = HealthKit.healthKit
     var firebase = Firebase.firebase
     let formatter = DateFormatter()
-    var ref = Database.database().reference()
-    let dishcpachgroup = DispatchGroup()
 
 
     
@@ -38,25 +36,29 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: userSetNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getHealthkit), name: NSNotification.Name(rawValue: userSetNotification), object: nil)
         // Do any additional setup after loading the view, typically from a nib.
         self.formatter.dateFormat = "dd-MM-yyyy"
    
             self.user.fillArray()
-            self.firebase.getXp()
-            self.healthKit.authHealthKit()
-            self.healthKit.getAutoKcal()
-       
-         NotificationCenter.default.addObserver(self, selector: #selector(updateAchievements), name: NSNotification.Name(rawValue: userSetNotification3), object: nil)
-            self.firebase.getAchivments()
+            self.firebase.initUser()
         
-         NotificationCenter.default.addObserver(self, selector: #selector(updateKcal), name: NSNotification.Name(rawValue: userSetNotification2), object: nil)
-            self.firebase.getKcal()
+       
         
 
     }
+    @objc func getHealthkit(){
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: userSetNotification2), object: nil)
+        user.olddailyXpArray.reverse()
+        self.healthKit.authHealthKit()
+        self.healthKit.getAutoKcal()
+        print("get health kit")
+    }
     
-    @objc func updateAchievements(){
+    @objc func updateUI() {
+        self.user.lvlSystem.setLvl()
+        
+        
         print("using achievements")
         for i in 0..<self.user.normAchiveArray.count{
             self.user.normAchiveArray[i].checkDate()
@@ -65,12 +67,6 @@ class FirstViewController: UIViewController {
             self.user.kcalAchiveArray[i].checkDate()
             self.user.lvlSystem.addDalyXp(newXp: self.user.kcalAchiveArray[i].Incrumet(newkcal: self.user.kcal.kcal))
         }
-        
-        self.firebase.saveAchivements()
-    }
-    
-    @objc func updateKcal(){
-        
         self.user.lvlSystem.addDalyXp(newXp: self.user.kcal.kcalDiff(newDate: self.formatter.string(from: Date())))
         
         if self.user.lvlSystem.didLvlChange(){
@@ -78,15 +74,12 @@ class FirstViewController: UIViewController {
         }
         
         setFields()
-        
-        
+
+        self.firebase.saveAchivements()
         self.firebase.saveKcal()
         self.firebase.saveXp()
-    }
-    
-    @objc func updateUI() {
-        self.user.lvlSystem.setLvl()
-        
+        user.olddailyXpArray[6] = user.lvlSystem.dalyXp
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

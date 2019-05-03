@@ -21,7 +21,7 @@ class CigaretViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebase.getCigarets()
+        //firebase.getCigarets()
         
         valuesArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         
@@ -62,9 +62,7 @@ class CigaretViewController: UIViewController {
         xAxis.axisLineColor = .white
         xAxis.labelTextColor = .white
         //xAxis.valueFormatter = self
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
             self.updateChartData()
-        })
         
     }
     
