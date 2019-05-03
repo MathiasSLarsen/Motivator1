@@ -10,6 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import HealthKit
+import UserNotifications
 
     let userSetNotification = "userSetNotification"
     let userSetNotification2 = "userSetNotification2"
@@ -40,6 +41,7 @@ class FirstViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.formatter.dateFormat = "dd-MM-yyyy"
    
+        localNotification()
             self.user.fillArray()
             self.firebase.initUser()
         
@@ -82,12 +84,33 @@ class FirstViewController: UIViewController {
 
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("viewWillAppear")
         setFields()
     }
     
+    func localNotification(){
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            
+        }
+        let content = UNMutableNotificationContent()
+        content.title = "Reminder"
+        content.body = "Remember to enter your data"
+        
+        let date = Date().addingTimeInterval(10)
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        
+        let uuidString = UUID().uuidString
+        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
+        
+        center.add(request) { (error) in
+            //handel errors
+        }
+    }
     func createLvlAlert(){
         let aleat = UIAlertController(title: "Level Up", message: "Congratulations you are now lvl \(user.lvlSystem.lvl)", preferredStyle: UIAlertController.Style.alert)
         
