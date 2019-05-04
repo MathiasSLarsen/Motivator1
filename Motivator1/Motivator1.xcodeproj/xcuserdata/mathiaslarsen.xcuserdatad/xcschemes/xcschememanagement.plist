@@ -7,12 +7,22 @@
 		<key>Motivator1.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>0</integer>
+		</dict>
+		<key>Motivator1UITests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>29</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>27EAA683221DE27000B8887C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>27EE5734227DC0D400BAB307</key>
 		<dict>
 			<key>primary</key>
 			<true/>

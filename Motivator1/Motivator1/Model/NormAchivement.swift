@@ -81,6 +81,7 @@ class NormAchivement: Achivements {
     func Decrument() -> Double{
         let temp = Achived()
         days = days - 1
+        formatter.dateFormat = "dd-MM-yyyy"
         date = formatter.string(from: yesterday!)
         return -reward - temp
     }
