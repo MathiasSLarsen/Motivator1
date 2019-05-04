@@ -19,7 +19,64 @@ struct Firebase {
     let uid = Auth.auth().currentUser?.uid
     
     
-    
+    func test(){
+        ref.child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+         
+            let formater = DateFormatter()
+            formater.dateFormat = "dd-MM-yyyy"
+            
+            //set totalxp
+            self.user.lvlSystem.xp = (snapshot.childSnapshot(forPath: "xp").childSnapshot(forPath: "totalXp").value as? Double)!
+            //set dailyxp
+            self.user.lvlSystem.dalyXp = (snapshot.childSnapshot(forPath: "xp").childSnapshot(forPath: "dailyxp").childSnapshot(forPath: formater.string(from: Date())).value as? Double)!
+            //set kcal
+            self.user.kcal.kcal = (snapshot.childSnapshot(forPath: "kcal").childSnapshot(forPath: "value").value as? Double)!
+            self.user.kcal.date = (snapshot.childSnapshot(forPath: "kcal").childSnapshot(forPath: "date").value as? String)!
+            //set achievement
+            for achive in self.user.kcalAchiveArray{
+                achive.days = (snapshot.childSnapshot(forPath: "achivements").childSnapshot(forPath: achive.name).childSnapshot(forPath: "days").value as? Int)!
+                achive.date = (snapshot.childSnapshot(forPath: "achivements").childSnapshot(forPath: achive.name).childSnapshot(forPath: "date").value as? String)!
+            }
+            for achive in self.user.normAchiveArray{
+                achive.days = (snapshot.childSnapshot(forPath: "achivements").childSnapshot(forPath: achive.name).childSnapshot(forPath: "days").value as? Int)!
+                achive.date = (snapshot.childSnapshot(forPath: "achivements").childSnapshot(forPath: achive.name).childSnapshot(forPath: "date").value as? String)!
+            }
+            //set cigaretts
+            let snap = snapshot.childSnapshot(forPath: "cigaret").childSnapshot(forPath: formater.string(from: Date()))
+            for child in snap.children{
+                let snap = child as! DataSnapshot
+                let houre = snap.value as! String
+                let cigaret = Cigaret(date: self.formatter.string(from: Date()), houre: houre)
+                self.user.cigiArray.append(cigaret)
+                print("cigeret hour is \(cigaret.houre)")
+                
+            }
+            let now = Date()
+            let formater1 = DateFormatter()
+            formater1.dateFormat = "dd-MM-yyyy"
+            let formater2 = DateFormatter()
+            formater2.dateFormat = "dd/MM"
+            
+            for i in (0...6).reversed(){
+                let dateElement = formater2.calendar.date(byAdding: .day, value: -i, to: now)
+                self.user.datesArray.append(formater2.string(from: dateElement!))
+                print("\(formater2.string(from: dateElement!))")
+                
+                let dateElement2 = formater1.calendar.date(byAdding: .day, value: -i, to: now)
+                let dateString = formater1.string(from: dateElement2!)
+                
+                
+                var value: Double?
+                value = snapshot.childSnapshot(forPath: "xp").childSnapshot(forPath: "dailyxp").childSnapshot(forPath: dateString).value as? Double
+                if value == nil {
+                    value = 0.0
+                }
+                self.user.olddailyXpArray[6-i] = value!
+            }
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: userSetNotification), object: self)
+            print("test databese new methode value is \(self.user.kcal.date)")
+        })
+    }
     
     func initUser(){
         

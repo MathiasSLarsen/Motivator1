@@ -43,7 +43,8 @@ class FirstViewController: UIViewController {
    
         localNotification()
             self.user.fillArray()
-            self.firebase.initUser()
+           // self.firebase.initUser()
+        firebase.test()
         
        
         
@@ -51,7 +52,7 @@ class FirstViewController: UIViewController {
     }
     @objc func getHealthkit(){
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: userSetNotification2), object: nil)
-        user.olddailyXpArray.reverse()
+        //user.olddailyXpArray.reverse()
         self.healthKit.authHealthKit()
         self.healthKit.getAutoKcal()
         print("get health kit")
