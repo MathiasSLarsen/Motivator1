@@ -19,6 +19,13 @@ class CreateUserViewController: UIViewController {
     
     @IBOutlet weak var txtPass: UITextField!
     
+    @IBOutlet weak var txtName: UITextField!
+    
+    @IBOutlet weak var txtPhone: UITextField!
+    
+    
+    @IBOutlet weak var txtCity: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +36,7 @@ class CreateUserViewController: UIViewController {
     @IBAction func CreateUser(_ sender: Any) {
        
         user.fillArray()
-        rest.createUser(username: txtEmail.text!)
+        rest.createUser(username: txtEmail.text!, name: txtName.text!)
     
         
         Auth.auth().createUser(withEmail: (txtEmail.text ?? ""), password: (txtPass.text ?? "")) { (result, error) in

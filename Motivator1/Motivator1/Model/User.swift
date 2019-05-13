@@ -14,16 +14,16 @@ class User {
     var dbId = 0
     let reward = 50.0
     var userName = ""
-    
+    /*
     struct OldDailyXp {
         let dailyXp: Double
         let date: String
     }
-    
+    */
     
     let formatter = DateFormatter()
     
-    var oldDailyXpArray = [OldDailyXp]()
+    var oldDailyXpArray = [0.0,0.0,0.0,0.0,0.0,0.0,0.0]
     var cigiArray = [Cigaret]()
     var normAchiveArray = [NormAchivement]()
     var kcalAchiveArray = [KcalAchivement]()

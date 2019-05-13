@@ -62,7 +62,7 @@ class BarChartViewController: UIViewController {
         
         
         
-            self.valuesArray.reverse()
+            //self.valuesArray.reverse()
             self.updateChartData()
         
         
@@ -84,6 +84,7 @@ class BarChartViewController: UIViewController {
     }
     
     func setChartData(){
+        valuesArray.removeAll()
         //let calender = Calendar.current
         let now = Date()
         let formater1 = DateFormatter()
@@ -96,7 +97,7 @@ class BarChartViewController: UIViewController {
             datesArray.append(formater2.string(from: dateElement!))
             print("\(formater2.string(from: dateElement!))")
             
-            valuesArray.append(user.oldDailyXpArray[i].dailyXp)
+            valuesArray.append(user.oldDailyXpArray[i])
             
         }
         //valuesArray.reverse()

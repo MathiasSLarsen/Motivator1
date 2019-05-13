@@ -228,7 +228,7 @@
                                             <navigationItem title="Title" id="tSK-kE-rA6">
                                                 <barButtonItem key="leftBarButtonItem" title="Back" id="eyW-em-aZo">
                                                     <connections>
-                                                        <segue destination="9pv-A4-QxB" kind="show" id="4y9-7t-x51"/>
+                                                        <segue destination="49e-Tb-3d3" kind="show" id="jL1-0A-FrR"/>
                                                     </connections>
                                                 </barButtonItem>
                                             </navigationItem>
@@ -556,7 +556,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="101" translatesAutoresizingMaskIntoConstraints="NO" id="3Ib-nV-eYh">
-                                        <rect key="frame" x="0.0" y="174" width="375" height="299"/>
+                                        <rect key="frame" x="0.0" y="75" width="375" height="497"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create user with Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgT-jx-Mem">
                                                 <rect key="frame" x="45" y="0.0" width="285.5" height="36"/>
@@ -565,7 +565,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="q5K-G9-yM2">
-                                                <rect key="frame" x="20" y="137" width="335" height="162"/>
+                                                <rect key="frame" x="20" y="137" width="335" height="360"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email@email.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Yb-rB-czh">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
@@ -579,8 +579,26 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbO-ym-liq">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2SR-gw-I2z">
                                                         <rect key="frame" x="0.0" y="132" width="335" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uqg-1J-IOD">
+                                                        <rect key="frame" x="0.0" y="198" width="335" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vl7-cw-Th4">
+                                                        <rect key="frame" x="0.0" y="264" width="335" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbO-ym-liq">
+                                                        <rect key="frame" x="0.0" y="330" width="335" height="30"/>
                                                         <state key="normal" title="Create User"/>
                                                         <connections>
                                                             <action selector="CreateUser:" destination="brV-gr-Fm0" eventType="touchUpInside" id="LPq-ZS-YcR"/>
@@ -590,7 +608,6 @@
                                                 <constraints>
                                                     <constraint firstItem="KbO-ym-liq" firstAttribute="leading" secondItem="q5K-G9-yM2" secondAttribute="leading" id="94q-jR-vbx"/>
                                                     <constraint firstAttribute="trailing" secondItem="KbO-ym-liq" secondAttribute="trailing" id="qko-nn-HiT"/>
-                                                    <constraint firstItem="KbO-ym-liq" firstAttribute="top" secondItem="HNB-cp-jcg" secondAttribute="bottom" constant="36" id="tSE-BS-Rbf"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -636,8 +653,11 @@
                         <viewLayoutGuide key="safeArea" id="doc-Bv-p0N"/>
                     </view>
                     <connections>
+                        <outlet property="txtCity" destination="vl7-cw-Th4" id="qNX-PB-K9K"/>
                         <outlet property="txtEmail" destination="1Yb-rB-czh" id="bnt-vu-4O9"/>
+                        <outlet property="txtName" destination="2SR-gw-I2z" id="jrK-RV-9gG"/>
                         <outlet property="txtPass" destination="HNB-cp-jcg" id="Nmc-vI-Zpt"/>
+                        <outlet property="txtPhone" destination="Uqg-1J-IOD" id="85q-1B-9ge"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="GoHome" id="2kZ-7X-s7c"/>
                     </connections>
                 </viewController>
@@ -871,8 +891,7 @@
         <image name="unchecked-checkbox" width="788" height="788"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pZ1-Jq-RuJ"/>
-        <segue reference="yxZ-6p-zL6"/>
-        <segue reference="u7Y-xg-7CH"/>
+        <segue reference="jL1-0A-FrR"/>
+        <segue reference="1nf-Ym-jdV"/>
     </inferredMetricsTieBreakers>
 </document>

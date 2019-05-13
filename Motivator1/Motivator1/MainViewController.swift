@@ -105,19 +105,22 @@ class FirstViewController: UIViewController {
     }
     
     @objc func setData(){
+        formatter.dateFormat = "dd-MM-yyyy"
         self.user.lvlSystem.setLvl()
+        print("dailyxp is \(user.lvlSystem.dalyXp)")
         self.user.lvlSystem.addDalyXp(newXp: self.user.kcal.kcalDiff(newDate: self.formatter.string(from: Date())))
         
+        print("dailyxp is \(user.lvlSystem.dalyXp)")
         if self.user.lvlSystem.didLvlChange(){
             self.createLvlAlert()
         }
         self.setFields()
         for i in 0..<self.user.normAchiveArray.count{
-            print("\(self.user.normAchiveArray[i].name) is used")
+            //print("\(self.user.normAchiveArray[i].name) is used")
             self.user.normAchiveArray[i].checkDate()
         }
         for i in 0..<self.user.kcalAchiveArray.count{
-            print("\(self.user.kcalAchiveArray[i].name) is used")
+            //print("\(self.user.kcalAchiveArray[i].name) is used")
             self.user.kcalAchiveArray[i].checkDate()
             self.user.lvlSystem.addDalyXp(newXp: self.user.kcalAchiveArray[i].Incrumet(newkcal: self.user.kcal.kcal))
         }
@@ -125,6 +128,8 @@ class FirstViewController: UIViewController {
         //self.firebase.saveKcal()
         //self.firebase.saveXp()
         self.rest.updateUser()
+        rest.updateDailyXp()
+        user.oldDailyXpArray[6] = user.lvlSystem.dalyXp
         
         for achieve in self.user.kcalAchiveArray{
             self.rest.updateKcalAchievement(achievement: achieve)

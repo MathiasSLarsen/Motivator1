@@ -198,6 +198,7 @@ class SecondViewController: UIViewController {
                 newXp = newXp + user.kcalAchiveArray[i].Incrumet(newkcal: newKcalxp)
             }
         }
+        formatter.dateFormat = "dd-MM-yyyy"
         if (formatter.string(from: Date()).elementsEqual(user.lvlSystem.date) ){
             user.lvlSystem.addDalyXp(newXp: newXp)
         }else{
@@ -221,6 +222,8 @@ class SecondViewController: UIViewController {
         }
         
         rest.updateUser()
+        rest.updateDailyXp()
+        user.oldDailyXpArray[6] = user.lvlSystem.dalyXp
         //firebase.saveXp()
         //firebase.saveAchivements()
         //firebase.saveKcal()

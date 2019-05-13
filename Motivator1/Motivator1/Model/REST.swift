@@ -8,6 +8,7 @@
 
 import Foundation
 
+let formatter = DateFormatter()
 
 struct OldDaliyXp {
     let dailyXp: Double
@@ -25,6 +26,12 @@ struct UserResp: Decodable{
     let achievements: [Achievements]?
 }
 
+struct userDatails: Decodable {
+    let id: Int
+    let fullName: String
+    let phoneNumber: String
+    let city: String
+}
 struct DailyXps: Decodable{
     let id: Int?
     let userId: Int?
@@ -55,12 +62,13 @@ class REST {
     var firebase = Firebase.firebase
     let formatter = DateFormatter()
     
-    func createUser(username: String){
+    func createUser(username: String, name: String){
         let url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/users")
         let parameter = ["userName": username,
                          "totalXp": user.lvlSystem.xp,
                          "kcals": user.kcal.kcal ,
-                         "KcalsTimeDate": user.kcal.date] as [String : Any]
+                         "KcalsTimeDate": user.kcal.date,
+                         "fullName": name] as [String : Any]
         var urlRequest = URLRequest(url: url! as URL)
         let session = URLSession.shared
         urlRequest.httpMethod = "POST"
@@ -124,7 +132,42 @@ class REST {
             }.resume()
     }
     
+    func updateDailyXp(){
+        let url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/dailyxps/\(user.lvlSystem.dailyId)")
+        let parameter = ["id": user.lvlSystem.dailyId,
+                         "userId": user.dbId,
+                         "dailyXp": user.lvlSystem.dalyXp,
+                         "dateTime": user.lvlSystem.date] as [String : Any]
+        var urlRequest = URLRequest(url: url! as URL)
+        let session = URLSession.shared
+        urlRequest.httpMethod = "PUT"
+        
+        do{
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameter, options: .prettyPrinted)
+        }
+        catch let error{
+            print(error.localizedDescription)
+        }
+        
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: urlRequest) { (data, responds, error) in
+            
+            guard let data = data else {return}
+            
+            do{
+                let respondsData = try JSONDecoder().decode(DailyXps.self, from: data)
+            }catch let jsonError{
+                print("error", jsonError)
+                print("error in update dailyxp")
+            }
+            }.resume()
+    }
+    
     func createDailyxp(){
+        formatter.dateFormat = "dd-MM-yyyy"
+        user.lvlSystem.date = formatter.string(from: Date())
         let url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/dailyxps")
         let parameter = ["userId": user.dbId,
                          "dailyXp": user.lvlSystem.dalyXp,
@@ -383,6 +426,7 @@ class REST {
                 for dailyxp in respondsData{
                     if (id == dailyxp.userId! && (dailyxp.dateTime?.elementsEqual(formatter.string(from: Date())))!){
                         self.user.lvlSystem.dalyXp = Double(dailyxp.dailyXP!)
+                        self.user.lvlSystem.dailyId = dailyxp.id!
                     }
                 }
             }catch let jsonError{
@@ -411,9 +455,9 @@ class REST {
                 formatter.dateFormat = "dd-MM-yyyy"
                 
                 let today = Date()
+                self.user.cigiArray.removeAll()
                 for cigi in respondsData{
-                    let cigiDate = formatter.date(from:cigi.dateTime!)
-                    if cigiDate == today {
+                    if ((cigi.dateTime?.elementsEqual(formatter.string(from: today)))! && self.user.dbId == cigi.userId) {
                         let newCigi = Cigaret(date: cigi.dateTime!, houre: String(cigi.hour!))
                         self.user.cigiArray.append(newCigi)
                     }
@@ -501,8 +545,11 @@ class REST {
                 let respondsData = try JSONDecoder().decode([DailyXps].self, from: data)
                 for daily in respondsData{
                     print("oldDaily xp is \(daily.dailyXP!)")
-                    let oldDailyXp = User.OldDailyXp.init(dailyXp: Double(daily.dailyXP!), date: daily.dateTime!)
-                    self.user.oldDailyXpArray.append(oldDailyXp)
+                    var i = 0
+                    self.user.oldDailyXpArray[6-i] = Double(daily.dailyXP!)
+                    //let oldDailyXp = User.OldDailyXp.init(dailyXp: Double(daily.dailyXP!), date: daily.dateTime!)
+                    //self.user.oldDailyXpArray.append(oldDailyXp)
+                    i += 1
                 }
             }catch let jsonError{
                 print("error", jsonError)
@@ -517,11 +564,13 @@ class REST {
         
         formatter.dateFormat = "H"
         let houre = formatter.string(from: Date())
+        formatter.dateFormat = "dd-MM-yyyy"
         
         let url = NSURL(string: "https://motivatorapi.azurewebsites.net/api/cigarets")
         let parameter = ["userId": user.dbId,
                          "cigaretsSmoked": 1,
-                         "hour": houre] as [String : Any]
+                         "hour": houre,
+                         "dateTime": formatter.string(from: Date())] as [String : Any]
         var urlRequest = URLRequest(url: url! as URL)
         let session = URLSession.shared
         urlRequest.httpMethod = "POST"
